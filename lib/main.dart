@@ -1,7 +1,11 @@
+import 'package:caronas/screen/home.dart';
+import 'package:caronas/screen/login.dart';
+import 'package:caronas/theme/theme.dart';
+import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,22 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Página de login"),
-    );
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: MyTheme.customTheme,
+        initialRoute: '/',
+        routes: {
+          AppRoutes.HOME: (context) => Home(),
+          AppRoutes.LOGIN: (context) => Login(),
+        });
   }
 }
