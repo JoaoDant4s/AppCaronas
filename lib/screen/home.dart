@@ -12,6 +12,7 @@ class _HomeState extends State<Home> {
   void _showBottomModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      clipBehavior: Clip.hardEdge,
       builder: (BuildContext context) {
         return BottomModal();
       },
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
                   onPressed: () {},
                 ),
                 const Text(
-                  "CARON",
+                  "EasyRide",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 const SizedBox(

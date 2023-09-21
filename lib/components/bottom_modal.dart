@@ -6,8 +6,48 @@ class BottomModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
-      child: Expanded(child: Text("Teste")),
+      height: 300,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/gifs/espanhol.gif",
+                  height: 120.0,
+                  width: 120.0,
+                ),
+                const Text(
+                  "Passageiro",
+                  style: TextStyle(fontSize: 27),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/gifs/volante.gif",
+                  height: 120.0,
+                  width: 120.0,
+                ),
+                const Text(
+                  "Motorista",
+                  style: TextStyle(fontSize: 27),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
