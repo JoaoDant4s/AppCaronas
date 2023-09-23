@@ -78,7 +78,7 @@ class BottomModal extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    print('you clicked me');
+                    Navigator.of(context).pushNamed(AppRoutes.REGISTER);
                   },
                 ),
               )

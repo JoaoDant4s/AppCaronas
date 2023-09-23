@@ -59,7 +59,6 @@ flutter:
     - assets/fonts/
     - assets/gifs/
     - assets/images/3dcar.png
-    - assets/images/search.png
     - assets/cards.json
   fonts:
     - family: Poppins
