@@ -51,7 +51,7 @@ BoxDecoration myBoxDecoration(){
                     ],
                   ),
                   onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutes.REGISTER);
+                  Navigator.of(context).pushNamed(AppRoutes.SEARCH);
                   },
                 ),
               ),

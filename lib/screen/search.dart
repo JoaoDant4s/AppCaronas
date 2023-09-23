@@ -6,6 +6,8 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Look for a ride',style: TextStyle(color: Colors.white),),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
@@ -17,6 +19,9 @@ class Search extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
+          icon: const Icon(Icons.arrow_back, color: Colors.white,),
+        ),
+      ),
           icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
