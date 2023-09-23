@@ -1,15 +1,16 @@
+import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class BottomModal extends StatelessWidget {
   const BottomModal({super.key});
-BoxDecoration myBoxDecoration(){
-  return BoxDecoration(
-    border: Border(top: BorderSide(
-      color: Colors.black,
-      width: 3.0,
-    ))
-  );
-}
+  BoxDecoration myBoxDecoration(){
+    return BoxDecoration(
+        border: Border(top: BorderSide(
+          color: Colors.black,
+          width: 3.0,
+        ))
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,15 +36,15 @@ BoxDecoration myBoxDecoration(){
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                          width: 120.0,
-                          height: 120.0,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/gifs/espanhol.gif"),
-                              fit: BoxFit.cover,
-                            ),
+                        width: 120.0,
+                        height: 120.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/gifs/espanhol.gif"),
+                            fit: BoxFit.cover,
                           ),
                         ),
+                      ),
                       const Text(
                         "Passenger",
                         style: TextStyle(fontSize: 20,),
@@ -51,7 +52,7 @@ BoxDecoration myBoxDecoration(){
                     ],
                   ),
                   onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutes.SEARCH);
+                    Navigator.of(context).pushNamed(AppRoutes.SEARCH);
                   },
                 ),
               ),
@@ -83,41 +84,6 @@ BoxDecoration myBoxDecoration(){
               )
             ],
           ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/gifs/espanhol.gif",
-                  height: 120.0,
-                  width: 120.0,
-                ),
-                const Text(
-                  "Passageiro",
-                  style: TextStyle(fontSize: 27),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/gifs/volante.gif",
-                  height: 120.0,
-                  width: 120.0,
-                ),
-                const Text(
-                  "Motorista",
-                  style: TextStyle(fontSize: 27),
-                )
-              ],
-            ),
-          )
         ],
       ),
     );
