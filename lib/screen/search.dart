@@ -6,9 +6,10 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFEDEDED),
       appBar: AppBar(
-        title: const Text(
+        backgroundColor: const Color(0xFF09C184),
+        title: Text(
           'Look for a ride',
           style: TextStyle(color: Colors.white),
         ),
@@ -17,98 +18,130 @@ class Search extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
       ),
-      body:SingleChildScrollView(
-        reverse: true,
+      body: SingleChildScrollView(
         child: Center(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(0.0, 1.0),
-                    blurRadius: 6.0,
-                  )
-                ],
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 60.0,),
-                  Container(
-                    width: 140.0,
-                    height: 140.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/gifs/map.gif"),
-
-
-                        fit: BoxFit.cover,
-                      ),
+          child: Container(
+            width: 300.0,
+            margin: EdgeInsets.all(20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.9),
+                  offset: Offset(2, 2),
+                  blurRadius: 4.0,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 70.0),
+                Container(
+                  width: 140.0,
+                  height: 140.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/gifs/map.gif"),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(top: 80, right: 50, left: 50),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Origin',
-                        border: OutlineInputBorder(),
-                      ),
+                ),
+                SizedBox(height: 50.0),
+                Container(
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      offset: Offset(0, 2),
+                      blurRadius: 4.0,
+                    ),
+                  ],
+                ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Origin',
+                      border: OutlineInputBorder(),
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(Icons.location_on),
                     ),
                   ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(top: 40, right: 50, left: 50),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Destiny',
-                        border: OutlineInputBorder(),
+                ),
+                SizedBox(height: 20.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        offset: Offset(0, 2),
+                        blurRadius: 4.0,
                       ),
+                    ],
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      labelText: 'Destiny',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.location_on),
                     ),
                   ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(top: 40, right: 50, left: 50,bottom: 30),
-                    child: TextField(
-                      decoration: InputDecoration(
-
-                        labelText: 'Date',
-                        border: OutlineInputBorder(),
+                ),
+                SizedBox(height: 20.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        offset: Offset(0, 2),
+                        blurRadius: 4.0,
                       ),
+                    ],
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: 'Date',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.calendar_today),
                     ),
                   ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(height: 80.0),
+              ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar:
-
-      Container(
-        margin: EdgeInsets.only(bottom: 38, left: 50, right: 50),
-
+      bottomNavigationBar: Container(
+          margin: EdgeInsets.only(top: 25, bottom: 20.0, left: 40.0, right: 40.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF09C184),
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.0),
           ),
           onPressed: () {},
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              SizedBox(width: 10.0),
               Text(
                 'Search',
                 style: TextStyle(
@@ -121,7 +154,6 @@ class Search extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 }
