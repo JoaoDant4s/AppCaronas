@@ -68,10 +68,38 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: HomeDrawer(),
-      body: const Center(
-        child: Text(
-          "Home Page",
-          style: TextStyle(fontSize: 40),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Hello there!",
+                          style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500,),
+                        ),
+                        SizedBox(height: 30,),
+                        Text('How about we look for a ride?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey[700], fontSize: 12),)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Stack(children: <Widget>[Image(image: AssetImage("assets/images/3dcar.png"),width: 800,fit: BoxFit.cover,),
+
+              ],)
+            ],
+          ),
         ),
       ),
     );
