@@ -1,3 +1,4 @@
+import 'package:caronas/screen/carpoolList.dart';
 import 'package:caronas/screen/home.dart';
 import 'package:caronas/screen/login.dart';
 import 'package:caronas/theme/theme.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoutes.HOME: (context) => Home(),
           AppRoutes.LOGIN: (context) => Login(),
+          AppRoutes.CARPOOLLIST: (context) => CarpoolList()
         });
   }
 }
