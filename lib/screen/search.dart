@@ -6,8 +6,6 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Look for a ride',style: TextStyle(color: Colors.white),),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
@@ -19,9 +17,6 @@ class Search extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back, color: Colors.white,),
-        ),
-      ),
           icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -48,21 +43,21 @@ class Search extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 60.0,),
-                Container(
-                width: 140.0,
-                height: 140.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/gifs/map.gif"),
+                  Container(
+                    width: 140.0,
+                    height: 140.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/gifs/map.gif"),
 
 
-                    fit: BoxFit.cover,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-              ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 80, right: 50, left: 50),
+                    const EdgeInsets.only(top: 80, right: 50, left: 50),
                     child: TextField(
                       decoration: InputDecoration(
                         labelText: 'Origin',
@@ -72,7 +67,7 @@ class Search extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 40, right: 50, left: 50),
+                    const EdgeInsets.only(top: 40, right: 50, left: 50),
                     child: TextField(
                       decoration: InputDecoration(
                         labelText: 'Destiny',
@@ -82,7 +77,7 @@ class Search extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 40, right: 50, left: 50,bottom: 30),
+                    const EdgeInsets.only(top: 40, right: 50, left: 50,bottom: 30),
                     child: TextField(
                       decoration: InputDecoration(
 
@@ -106,25 +101,25 @@ class Search extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 38, left: 50, right: 50),
 
         child: ElevatedButton(
-         style: ElevatedButton.styleFrom(
-           backgroundColor: const Color(0xFF09C184),
-           padding: EdgeInsets.all(20),
-         ),
-         onPressed: () {},
-         child: Row(
-           mainAxisSize: MainAxisSize.min,
-           children: [
-             Text(
-               'Search',
-               style: TextStyle(
-                 fontWeight: FontWeight.w800,
-                 fontSize: 20,
-                 color: Colors.white,
-               ),
-             )
-           ],
-         ),
-     ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF09C184),
+            padding: EdgeInsets.all(20),
+          ),
+          onPressed: () {},
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Search',
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
 
     );
