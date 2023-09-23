@@ -58,6 +58,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/gifs/
+    - assets/cards.json
   fonts:
     - family: Poppins
       fonts:

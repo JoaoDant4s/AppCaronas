@@ -1,0 +1,132 @@
+[
+    {
+      "name": "Pedro Santos",
+      "userImage": "https://example.com/user1.jpg",
+      "rating": 4.5,
+      "price": 20.0,
+      "time": "08:00 AM",
+      "availableSeats": "2/3"
+    },
+    {
+      "name": "Pedro Santos",
+      "userImage": "https://example.com/user2.jpg",
+      "rating": 4.8,
+      "price": 15.5,
+      "time": "09:30 AM",
+      "availableSeats": "0/2"
+    },
+    {
+      "name": "Pedro Santos",
+      "userImage": "https://example.com/user3.jpg",
+      "rating": 4.2,
+      "price": 18.0,
+      "time": "10:15 AM",
+      "availableSeats": "3/3"
+    },
+    {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user3.jpg",
+        "rating": 4.2,
+        "price": 18.0,
+        "time": "10:15 AM",
+        "availableSeats": "3/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      },
+      {
+        "name": "Pedro Santos",
+        "userImage": "https://example.com/user1.jpg",
+        "rating": 4.5,
+        "price": 20.0,
+        "time": "08:00 AM",
+        "availableSeats": "2/3"
+      }
+      
+  ]
+  
