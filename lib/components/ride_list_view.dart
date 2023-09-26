@@ -1,9 +1,10 @@
 import 'package:caronas/components/card.dart';
-import 'package:caronas/models/ride.dart';
 import 'package:flutter/material.dart';
+import 'package:caronas/models/ride.dart';
+import 'package:caronas/screen/rideDetails.dart';
 
 class RideList extends StatelessWidget {
-  List<Ride> _rides;
+  final List<Ride> _rides;
 
   RideList(this._rides);
 
@@ -17,7 +18,17 @@ class RideList extends StatelessWidget {
         itemCount: _rides.length,
         itemBuilder: (context, index) {
           final ride = _rides[index];
-          return CardRide(ride);
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RideDetailPage(ride: ride),
+                ),
+              );
+            },
+            child: CardRide(ride),
+          );
         },
       ),
     );

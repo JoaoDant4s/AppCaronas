@@ -1,4 +1,3 @@
-import 'package:caronas/screen/carpoolList.dart';
 import 'package:caronas/screen/home.dart';
 import 'package:caronas/screen/login.dart';
 import 'package:caronas/screen/newAccount.dart';
@@ -20,12 +19,11 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: MyTheme.customTheme,
-        initialRoute: '/login',
+        initialRoute: '/',
         routes: {
           AppRoutes.HOME: (context) => Home(),
           AppRoutes.LOGIN: (context) => Login(),
           AppRoutes.SEARCH: (context) => Search(),
-          AppRoutes.CARPOOLLIST: (context) => CarpoolList(),
           AppRoutes.REGISTER: (context) => Register(),
           AppRoutes.NEWACCOUNT: (context) => CadastroLogin(),
         });
