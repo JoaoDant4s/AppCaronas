@@ -9,17 +9,16 @@ class RideList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: 1200,
-        padding: const EdgeInsets.fromLTRB(20.0, 0, 20, 20),
-        child: ListView.builder(
-          itemCount: _rides.length,
-          itemBuilder: (context, index) {
-            final ride = _rides[index];
-            return CardRide(ride);
-          },
-        ),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20.0, 0, 20, 20),
+      child: ListView.builder(
+        shrinkWrap: true,
+        primary: false,
+        itemCount: _rides.length,
+        itemBuilder: (context, index) {
+          final ride = _rides[index];
+          return CardRide(ride);
+        },
       ),
     );
   }
