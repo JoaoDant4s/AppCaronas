@@ -40,6 +40,7 @@ class _SearchState extends State<Search> {
     super.initState();
     setState(() {
       _rides = List.from(ridesData);
+      _filteredRides = List.from(_rides);
     });
   }
 
