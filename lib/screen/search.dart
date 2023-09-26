@@ -1,15 +1,50 @@
+import 'package:caronas/components/search_bar_ride.dart';
+import 'package:caronas/models/ride.dart';
 import 'package:flutter/material.dart';
 
-class Search extends StatelessWidget {
+class Search extends StatefulWidget {
   const Search({super.key});
 
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  _searchRides(String origin, String destiny) {}
+
+  List<Ride> _rides = [
+    Ride(
+      id: '1',
+      origin: 'Nevaldo Rocha, Natal, RN',
+      destiny: 'Prudente de Morais, Natal, RN',
+      price: 23.50,
+      date: DateTime.now(),
+      seats: 4,
+    ),
+    Ride(
+      id: '2',
+      origin: 'Salgado Filho, Natal, RN',
+      destiny: 'Prudente de Morais, Natal, RN',
+      price: 13.50,
+      date: DateTime.now(),
+      seats: 3,
+    ),
+    Ride(
+      id: '3',
+      origin: 'Engenheiro Roberto Freire, Natal, RN',
+      destiny: 'Rua Beija Flor, Pipa, RN',
+      price: 300,
+      date: DateTime.now(),
+      seats: 3,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFEDEDED),
       appBar: AppBar(
         backgroundColor: const Color(0xFF09C184),
-        title: Text(
+        title: const Text(
           'Look for a ride',
           style: TextStyle(color: Colors.white),
         ),
@@ -18,141 +53,16 @@ class Search extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            width: 300.0,
-            margin: EdgeInsets.all(20.0),
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.9),
-                  offset: Offset(2, 2),
-                  blurRadius: 4.0,
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: 70.0),
-                Container(
-                  width: 140.0,
-                  height: 140.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/gifs/map.gif"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 50.0),
-                Container(
-                  decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      offset: Offset(0, 2),
-                      blurRadius: 4.0,
-                    ),
-                  ],
-                ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Origin',
-                      border: OutlineInputBorder(),
-                      filled: true,
-                      fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.location_on),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        offset: Offset(0, 2),
-                        blurRadius: 4.0,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      labelText: 'Destiny',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.location_on),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        offset: Offset(0, 2),
-                        blurRadius: 4.0,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      labelText: 'Date',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.calendar_today),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 80.0),
-              ],
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-          margin: EdgeInsets.only(top: 25, bottom: 20.0, left: 40.0, right: 40.0),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF09C184),
-            padding: EdgeInsets.all(20.0),
-          ),
-          onPressed: () {},
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              SizedBox(width: 10.0),
-              Text(
-                'Search',
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-        ),
+      body: Column(
+        children: <Widget>[
+          SearchBarRide(),
+        ],
       ),
     );
   }
