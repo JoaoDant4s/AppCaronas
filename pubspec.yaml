@@ -61,7 +61,6 @@ flutter:
     - assets/gifs/
     - assets/images/3dcar.png
     - assets/images/car2d.png
-    - assets/cards.json
   fonts:
     - family: Poppins
       fonts:

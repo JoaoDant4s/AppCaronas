@@ -8,7 +8,6 @@ final ridesData = [
     price: 23.50,
     date: DateTime.now(),
     seats: 4,
-    availableSeats: 2,
   ),
   Ride(
     id: '2',
@@ -17,7 +16,6 @@ final ridesData = [
     price: 13.50,
     date: DateTime.now(),
     seats: 3,
-    availableSeats: 1,
   ),
   Ride(
     id: '3',
@@ -26,7 +24,6 @@ final ridesData = [
     price: 300.00,
     date: DateTime.now(),
     seats: 3,
-    availableSeats: 2,
   ),
   Ride(
     id: '4',
@@ -35,7 +32,6 @@ final ridesData = [
     price: 45.00,
     date: DateTime.now(),
     seats: 2,
-    availableSeats: 0,
   ),
   Ride(
     id: '5',
@@ -44,7 +40,6 @@ final ridesData = [
     price: 18.75,
     date: DateTime.now(),
     seats: 5,
-    availableSeats: 3,
   ),
   Ride(
     id: '6',
@@ -53,7 +48,6 @@ final ridesData = [
     price: 60.00,
     date: DateTime.now(),
     seats: 3,
-    availableSeats: 2,
   ),
   Ride(
     id: '7',
@@ -62,7 +56,6 @@ final ridesData = [
     price: 40.50,
     date: DateTime.now(),
     seats: 4,
-    availableSeats: 1,
   ),
   Ride(
     id: '8',
@@ -71,7 +64,6 @@ final ridesData = [
     price: 75.00,
     date: DateTime.now(),
     seats: 3,
-    availableSeats: 2,
   ),
   Ride(
     id: '9',
@@ -80,7 +72,6 @@ final ridesData = [
     price: 35.25,
     date: DateTime.now(),
     seats: 2,
-    availableSeats: 1,
   ),
   Ride(
     id: '10',
@@ -89,6 +80,5 @@ final ridesData = [
     price: 85.00,
     date: DateTime.now(),
     seats: 4,
-    availableSeats: 3,
   ),
 ];
