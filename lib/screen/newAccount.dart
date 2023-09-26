@@ -30,24 +30,23 @@ class _CadastroLoginState extends State<CadastroLogin> {
         _confirmPasswordController.text.isEmpty ||
         _birthdateController.text.isEmpty ||
         _genderController.text.isEmpty) {
-      return false; // Campos em branco
+      return false;
     } else if (_passwordController.text != _confirmPasswordController.text) {
-      return false; // Senhas não coincidem
+      return false;
     }
-    return true; // Formulário válido
+    return true;
   }
 
   void _registerUser() {
     if (_validateForm()) {
-      // Os campos estão preenchidos e as senhas coincidem
+
 
       String username = _usernameController.text;
       String password = _passwordController.text;
       String birthdate = _birthdateController.text;
       String gender = _genderController.text;
 
-      // Agora você pode criar uma instância de usuário e fazer algo com ela,
-      // como enviá-la para um serviço de backend ou armazená-la localmente.
+
 
       showDialog(
         context: context,
@@ -151,13 +150,13 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     backgroundColor: Colors.green,
                   ),
                   child: Container(
-                    width: double.infinity, // Largura igual à largura do TextField
+                    width: double.infinity,
                     child: Center(child: Text('Escolher Imagem',style: TextStyle(color: Colors.white,fontSize: 20),)),
                   ),
                 ),
                 Container(
                   height: 152,
-                  width: 152, // Largura igual à largura do TextField
+                  width: 152,
                   child: _imageFile != null
                       ? Image.file(File(_imageFile!.path), fit: BoxFit.cover)
                       : Placeholder(),
@@ -170,7 +169,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     backgroundColor: Colors.green,
                   ),
                   child: Container(
-                    width: double.infinity, // Largura igual à largura do TextField
+                    width: double.infinity,
                     child: Center(child: Text('Register',style: TextStyle(color: Colors.white,fontSize: 20),)),
                   ),
                 ),
