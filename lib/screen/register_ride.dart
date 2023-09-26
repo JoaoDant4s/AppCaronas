@@ -74,7 +74,7 @@ class _RegisterState extends State<Register> {
         ),
         behavior: SnackBarBehavior.floating,
         duration: Duration(seconds: 3), // Duração do SnackBar
-        margin: EdgeInsets.fromLTRB(20, 0, 20, 300),
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
       ),
     );
   }

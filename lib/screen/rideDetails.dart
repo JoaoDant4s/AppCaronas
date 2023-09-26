@@ -19,7 +19,6 @@ class RideDetailPage extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back,
