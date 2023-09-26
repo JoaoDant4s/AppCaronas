@@ -12,15 +12,6 @@ class _SearchBarRideState extends State<SearchBarRide> {
   final _originController = TextEditingController();
   final _destinyController = TextEditingController();
 
-  _submitSearch() {
-    final origin = _originController.text;
-    final destiny = _destinyController.text;
-
-    if (origin.isEmpty && destiny.isEmpty) return;
-
-    widget.onSearch(origin, destiny);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,6 +43,12 @@ class _SearchBarRideState extends State<SearchBarRide> {
             ),
             child: TextField(
               controller: _destinyController,
+              onChanged: (value) {
+                widget.onSearch(
+                  _originController.text,
+                  _destinyController.text,
+                );
+              },
               decoration: const InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
@@ -75,6 +72,12 @@ class _SearchBarRideState extends State<SearchBarRide> {
             ),
             child: TextField(
               controller: _originController,
+              onChanged: (value) {
+                widget.onSearch(
+                  _originController.text,
+                  _destinyController.text,
+                );
+              },
               decoration: const InputDecoration(
                 labelText: 'Origin',
                 border: OutlineInputBorder(),
@@ -84,7 +87,6 @@ class _SearchBarRideState extends State<SearchBarRide> {
               ),
             ),
           ),
-          const SizedBox(height: 20.0),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -95,33 +97,6 @@ class _SearchBarRideState extends State<SearchBarRide> {
                   blurRadius: 4.0,
                 ),
               ],
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF09C184),
-                padding: const EdgeInsets.all(20.0),
-              ),
-              onPressed: _submitSearch,
-              child: const Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    SizedBox(width: 10.0),
-                    Text(
-                      'Search',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
-                ),
-              ),
             ),
           ),
         ],

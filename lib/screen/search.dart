@@ -14,13 +14,22 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   _searchRides(String origin, String destiny) {
     List<Ride> searchResults = _rides.where((ride) {
-      return ride.origin.contains(origin) || ride.destiny.contains(destiny);
+      bool isInOrigin = false;
+      bool isInDestiny = false;
+      if (origin.isNotEmpty) {
+        isInOrigin = ride.origin.toLowerCase().contains(origin.toLowerCase());
+      }
+      if (destiny.isNotEmpty) {
+        isInDestiny =
+            ride.destiny.toLowerCase().contains(destiny.toLowerCase());
+      }
+      return isInOrigin || isInDestiny;
     }).toList();
-
     setState(() {
-      setState(() {
-        _filteredRides = List.from(searchResults);
-      });
+      _filteredRides = List.from(searchResults);
+      if (origin.isEmpty && destiny.isEmpty) {
+        _filteredRides = List.from(_rides);
+      }
     });
   }
 
@@ -57,15 +66,29 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Expanded(
-          child: Column(
-            children: <Widget>[
-              SearchBarRide(_searchRides),
-              RideList(_filteredRides.isEmpty ? _rides : _filteredRides),
-            ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          SearchBarRide(_searchRides),
+          Visibility(
+            visible: _filteredRides.isNotEmpty,
+            child: Expanded(
+              child: RideList(_filteredRides),
+            ),
           ),
-        ),
+          Visibility(
+            visible: _filteredRides.isEmpty,
+            child: const Center(
+              child: Text(
+                "Nenhuma carona encontrada",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFF09C184),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
