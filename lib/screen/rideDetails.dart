@@ -78,7 +78,7 @@ class RideDetailPage extends StatelessWidget {
             ),
             SizedBox(height: 4),
             Text(
-              ride.availableSeats.toString(),
+              ride.seats.toString(),
               style: TextStyle(fontSize: 16),
             ),
           ],

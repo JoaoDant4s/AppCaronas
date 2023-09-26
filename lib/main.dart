@@ -1,7 +1,7 @@
 import 'package:caronas/screen/home.dart';
 import 'package:caronas/screen/login.dart';
 import 'package:caronas/screen/newAccount.dart';
-import 'package:caronas/screen/register.dart';
+import 'package:caronas/screen/register_ride.dart';
 import 'package:caronas/screen/search.dart';
 import 'package:caronas/theme/theme.dart';
 import 'package:caronas/utils/app_routes.dart';
