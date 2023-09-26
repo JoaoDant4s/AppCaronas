@@ -6,4 +6,5 @@ class AppRoutes {
   static const SEARCH = '/search';
   static const CARPOOLLIST = '/carpoollist';
   static const REGISTER = '/register';
+  static const NEWACCOUNT = '/newAccount';
 }
