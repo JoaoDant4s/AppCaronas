@@ -1,15 +1,53 @@
+import 'package:caronas/models/ride.dart';
 import 'package:flutter/material.dart';
 
-class Card extends StatefulWidget {
-  const Card({super.key});
+class CardRide extends StatelessWidget {
+  final Ride ride;
 
-  @override
-  State<Card> createState() => _CardState();
-}
+  const CardRide(this.ride);
 
-class _CardState extends State<Card> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Card(
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              ride.destiny,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF09C184)),
+            ),
+            Text(
+              ride.origin,
+              style: const TextStyle(fontSize: 14),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    constraints: BoxConstraints(minWidth: 80),
+                    child: Text('R\$ ${ride.price.toStringAsFixed(2)}')),
+                Container(
+                  constraints: BoxConstraints(minWidth: 60),
+                  child: Text(
+                      '${ride.date.day.toString()}/${ride.date.month.toString()}'),
+                ),
+                Container(
+                    constraints: BoxConstraints(minWidth: 60),
+                    child: Text(ride.seats.toString()))
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
