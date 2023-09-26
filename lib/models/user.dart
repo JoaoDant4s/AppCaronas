@@ -1,18 +1,21 @@
+import 'dart:io';
+
 class User {
   String id;
-  String origin;
-  String destiny;
-  DateTime date;
-  double price;
-  int seats;
-  int availableSeats;
+  String name;
+  String gender;
+  DateTime birth;
+  String password;
+  File? image;
+  double rating;
 
-  User(
-      {required this.id,
-        required this.origin,
-        required this.destiny,
-        required this.date,
-        required this.price,
-        required this.seats,
-        required this.availableSeats});
+  User({
+    required this.id,
+    required this.birth,
+    required this.gender,
+    required this.name,
+    required this.password,
+    required this.image,
+    required this.rating,
+  });
 }
