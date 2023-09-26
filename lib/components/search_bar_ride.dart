@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
 class SearchBarRide extends StatefulWidget {
-  const SearchBarRide({super.key});
+  void Function(String, String) onSearch;
 
+  SearchBarRide(this.onSearch);
   @override
   State<SearchBarRide> createState() => _SearchBarRideState();
 }
 
 class _SearchBarRideState extends State<SearchBarRide> {
+  final _originController = TextEditingController();
+  final _destinyController = TextEditingController();
+
+  _submitSearch() {
+    final origin = _originController.text;
+    final destiny = _destinyController.text;
+
+    if (origin.isEmpty && destiny.isEmpty) return;
+
+    widget.onSearch(origin, destiny);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,32 +40,23 @@ class _SearchBarRideState extends State<SearchBarRide> {
       child: Column(
         children: [
           Container(
-            width: 140.0,
-            height: 140.0,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/gifs/map.gif"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
-                  offset: Offset(0, 2),
+                  offset: const Offset(0, 2),
                   blurRadius: 4.0,
                 ),
               ],
             ),
             child: TextField(
-              decoration: InputDecoration(
-                labelText: 'Origin',
-                border: OutlineInputBorder(),
-                filled: true,
+              controller: _destinyController,
+              decoration: const InputDecoration(
                 fillColor: Colors.white,
+                filled: true,
+                labelText: 'Destiny',
+                border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.location_on),
               ),
             ),
@@ -70,11 +74,12 @@ class _SearchBarRideState extends State<SearchBarRide> {
               ],
             ),
             child: TextField(
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                labelText: 'Destiny',
+              controller: _originController,
+              decoration: const InputDecoration(
+                labelText: 'Origin',
                 border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
                 prefixIcon: Icon(Icons.location_on),
               ),
             ),
@@ -96,7 +101,7 @@ class _SearchBarRideState extends State<SearchBarRide> {
                 backgroundColor: const Color(0xFF09C184),
                 padding: const EdgeInsets.all(20.0),
               ),
-              onPressed: () {},
+              onPressed: _submitSearch,
               child: const Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

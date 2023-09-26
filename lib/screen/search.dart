@@ -1,4 +1,6 @@
+import 'package:caronas/components/ride_list_view.dart';
 import 'package:caronas/components/search_bar_ride.dart';
+import 'package:caronas/data/my_cards.dart';
 import 'package:caronas/models/ride.dart';
 import 'package:flutter/material.dart';
 
@@ -10,34 +12,29 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  _searchRides(String origin, String destiny) {}
+  _searchRides(String origin, String destiny) {
+    List<Ride> searchResults = _rides.where((ride) {
+      return ride.origin.contains(origin) || ride.destiny.contains(destiny);
+    }).toList();
 
-  List<Ride> _rides = [
-    Ride(
-      id: '1',
-      origin: 'Nevaldo Rocha, Natal, RN',
-      destiny: 'Prudente de Morais, Natal, RN',
-      price: 23.50,
-      date: DateTime.now(),
-      seats: 4,
-    ),
-    Ride(
-      id: '2',
-      origin: 'Salgado Filho, Natal, RN',
-      destiny: 'Prudente de Morais, Natal, RN',
-      price: 13.50,
-      date: DateTime.now(),
-      seats: 3,
-    ),
-    Ride(
-      id: '3',
-      origin: 'Engenheiro Roberto Freire, Natal, RN',
-      destiny: 'Rua Beija Flor, Pipa, RN',
-      price: 300,
-      date: DateTime.now(),
-      seats: 3,
-    ),
-  ];
+    setState(() {
+      setState(() {
+        _filteredRides = List.from(searchResults);
+      });
+    });
+  }
+
+  List<Ride> _rides = [];
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _rides = List.from(ridesData);
+    });
+  }
+
+  List<Ride> _filteredRides = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +49,7 @@ class _SearchState extends State<Search> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -59,10 +57,15 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          SearchBarRide(),
-        ],
+      body: SingleChildScrollView(
+        child: Expanded(
+          child: Column(
+            children: <Widget>[
+              SearchBarRide(_searchRides),
+              RideList(_filteredRides.isEmpty ? _rides : _filteredRides),
+            ],
+          ),
+        ),
       ),
     );
   }
