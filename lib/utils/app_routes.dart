@@ -7,4 +7,5 @@ class AppRoutes {
   static const CARPOOLLIST = '/carpoollist';
   static const REGISTER = '/register';
   static const NEWACCOUNT = '/newAccount';
+  static const MYPROFILE = '/myProfile';
 }

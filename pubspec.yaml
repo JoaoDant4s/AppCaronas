@@ -62,6 +62,7 @@ flutter:
     - assets/gifs/
     - assets/images/3dcar.png
     - assets/images/car2d.png
+    - assets/images/joao_dantas.jpg
   fonts:
     - family: Poppins
       fonts:

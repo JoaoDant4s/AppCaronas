@@ -45,7 +45,7 @@ class _LoginState extends State<Login> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'E-mail',
-                      hintText: 'example@example.com', // Hint text aqui
+                      hintText: 'example@example.com',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black, // Cor da borda quando habilitado
@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return 'E-mail is required';
                       }
                       return null;
                     },
@@ -93,7 +93,7 @@ class _LoginState extends State<Login> {
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return 'Password is required';
                       }
                       return null;
                     },
@@ -106,7 +106,6 @@ class _LoginState extends State<Login> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            // Realize a ação de Log In aqui
                           }
                         },
                         style: ElevatedButton.styleFrom(
