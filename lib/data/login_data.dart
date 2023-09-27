@@ -10,7 +10,7 @@ final loginData = [
     gender: 'Male',
     name: 'Edvaldo',
     password: 'edy',
-    image: File('/assets/images/edvaldo.jpeg'),
+    image: File('assets/images/edvaldo.jpeg'),
     rating: 4.5,
   ),
   User(
