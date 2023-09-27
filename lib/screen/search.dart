@@ -58,8 +58,7 @@ class _SearchState extends State<Search> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
-            Navigator.pop(context);
+            Navigator.popUntil(context, ModalRoute.withName("/"));
           },
           icon: const Icon(
             Icons.arrow_back,

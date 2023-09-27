@@ -13,7 +13,8 @@ class CadastroLogin extends StatefulWidget {
 class _CadastroLoginState extends State<CadastroLogin> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _birthdateController = TextEditingController();
   String _selectedGender = 'Masculino';
@@ -22,7 +23,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
 
   final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
 
-  final _formKey = GlobalKey<FormState>(); // Chave do formulário
+  final _formKey = GlobalKey<FormState>();
 
   void initState() {
     super.initState();
@@ -45,7 +46,8 @@ class _CadastroLoginState extends State<CadastroLogin> {
   }
 
   Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         _imageFile = pickedImage;
@@ -73,7 +75,6 @@ class _CadastroLoginState extends State<CadastroLogin> {
       );
 
       setState(() {
-        // Adicione o novo usuário à lista loginData
         loginData.add(newUser);
 
         _usernameController.clear();
@@ -89,8 +90,8 @@ class _CadastroLoginState extends State<CadastroLogin> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Sucesso'),
-            content: Text('Cadastro de login realizado com sucesso!'),
+            title: Text('Success'),
+            content: Text('User registered successfully!'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -110,7 +111,8 @@ class _CadastroLoginState extends State<CadastroLogin> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        title: Text('Login registration', style: TextStyle(color: Colors.white)),
+        title:
+            Text('Login registration', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -138,25 +140,24 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     decoration: InputDecoration(labelText: 'Username'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return 'Username is required';
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 20.0),
-
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(labelText: 'E-mail', hintText: 'example@example.com'),
+                    decoration: InputDecoration(
+                        labelText: 'E-mail', hintText: 'example@example.com'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return 'E-mail is required';
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 20.0),
-
                   TextFormField(
                     controller: _passwordController,
                     obscureText: true,
@@ -166,13 +167,12 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return 'Password is required';
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 20.0),
-
                   TextFormField(
                     controller: _confirmPasswordController,
                     obscureText: true,
@@ -182,34 +182,32 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return 'Confirm password is required';
                       }
                       if (value != _passwordController.text) {
-                        return 'As senhas não coincidem';
+                        return 'Password and Confirm password must be equals';
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 20.0),
-
                   TextFormField(
                     controller: _birthdateController,
                     decoration: InputDecoration(
-                      labelText: 'Data de Nascimento',
-                      hintText: 'DD/MM/AAAA',
+                      labelText: 'Birth date',
+                      hintText: 'MM/DD/AAAA',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, preencha este campo';
+                        return '';
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 20.0),
-
                   DropdownButtonFormField(
                     value: _selectedGender,
-                    items: ['Masculino', 'Feminino'].map((gender) {
+                    items: ['Masculino', 'Feminino', 'Outro'].map((gender) {
                       return DropdownMenuItem(
                         value: gender,
                         child: Text(gender),
@@ -222,14 +220,12 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor, selecione um gênero';
+                        return 'Gender is required';
                       }
                       return null;
                     },
                   ),
-
                   SizedBox(height: 20.0),
-
                   ElevatedButton(
                     onPressed: _pickImage,
                     style: ElevatedButton.styleFrom(
@@ -237,7 +233,11 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     child: Container(
                       width: double.infinity,
-                      child: Center(child: Text('Escolher Imagem',style: TextStyle(color: Colors.white,fontSize: 20),)),
+                      child: Center(
+                          child: Text(
+                        'Select image',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
                     ),
                   ),
                   Container(
@@ -247,7 +247,6 @@ class _CadastroLoginState extends State<CadastroLogin> {
                         ? Image.file(File(_imageFile!.path), fit: BoxFit.cover)
                         : Placeholder(),
                   ),
-
                   SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: _registerUser,
@@ -256,7 +255,11 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     child: Container(
                       width: double.infinity,
-                      child: Center(child: Text('Register',style: TextStyle(color: Colors.white,fontSize: 20),)),
+                      child: Center(
+                          child: Text(
+                        'Register',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
                     ),
                   ),
                 ],

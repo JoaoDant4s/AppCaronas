@@ -64,16 +64,16 @@ class _RegisterState extends State<Register> {
     _seats.text = "";
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        backgroundColor: Colors.green, // Cor de fundo personalizada (verde)
+        backgroundColor: Colors.green,
         content: Text(
           "Ride created successfully",
           style: TextStyle(
-            color: Colors.white, // Cor do texto personalizada (branco)
-            fontSize: 16.0, // Tamanho do texto personalizado
+            color: Colors.white,
+            fontSize: 16.0,
           ),
         ),
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 3), // Duração do SnackBar
+        duration: Duration(seconds: 3),
         margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
       ),
     );
@@ -200,10 +200,7 @@ class _RegisterState extends State<Register> {
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(
-                                color:
-                                    Colors.black) // Cor de fundo do container
-                            ),
+                            border: Border.all(color: Colors.black)),
                         height: 65,
                         child: Container(
                           padding: const EdgeInsetsDirectional.symmetric(
@@ -225,7 +222,7 @@ class _RegisterState extends State<Register> {
                               ),
                               TextButton(
                                   onPressed: () => _showDatePicker(context),
-                                  child: const Text('Selecionar data',
+                                  child: const Text('Select date',
                                       style: TextStyle(
                                         color: Color(0xFF09C184),
                                       )))
