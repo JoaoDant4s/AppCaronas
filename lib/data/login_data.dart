@@ -7,7 +7,7 @@ final loginData = [
     id: '1',
     email: 'joao.dantas.017@ufrn.edu.br',
     birth: DateTime(2001, 12, 29),
-    gender: 'Masculino',
+    gender: 'Male',
     name: 'João Dantas',
     password: 'senha123',
     image: File('assets/images/joao_dantas.jpg'),

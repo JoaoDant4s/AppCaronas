@@ -45,7 +45,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         shape: BoxShape.circle,
                       ),
                       child: CircleAvatar(
-                        backgroundImage: FileImage(File(_myUser.image!.path)),
+                        backgroundImage: AssetImage(_myUser.image!.path),
                       ),
                     ),
                     const SizedBox(
@@ -91,7 +91,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         ),
                       ),
                     );
-                    ;
+
                   },
                   child: const Row(
                     children: [
@@ -122,17 +122,21 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Row(
-                  children: [
-                    Icon(Icons.logout, size: 30),
-                    SizedBox(width: 10),
-                    Text(
-                      "Logout",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(width: 20),
-                  ],
-                )
+                 InkWell(
+                     onTap: () {
+                       Navigator.popUntil(context, ModalRoute.withName("/login"));
+                     },
+                   child: const Row(
+                    children: [
+                      Icon(Icons.logout, size: 30),
+                      SizedBox(width: 10),
+                      Text(
+                        "Logout",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                ),
+                 )
               ],
             ),
           ],
