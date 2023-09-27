@@ -1,10 +1,29 @@
 import 'dart:io';
 
+import 'package:caronas/data/login_data.dart';
+import 'package:caronas/models/user.dart';
+import 'package:caronas/screen/my_profile.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
-class HomeDrawer extends StatelessWidget {
+class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});
+
+  @override
+  State<HomeDrawer> createState() => _HomeDrawerState();
+}
+
+class _HomeDrawerState extends State<HomeDrawer> {
+  User _myUser = loginData[0];
+
+  @override
+  void initState() {
+    super.initState();
+    if (loginData.isNotEmpty) {
+      _myUser = loginData.first;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,34 +45,33 @@ class HomeDrawer extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage("assets/images/joao_dantas.jpg"),
+                        backgroundImage: FileImage(File(_myUser.image!.path)),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(
+                        width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Nome do usuário
                         Text(
-                          "João Dantas",
-                          style: TextStyle(
+                          _myUser.name,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
-                        // Avaliação do usuário
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.star,
                               color: Colors.orange,
                               size: 20,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text(
-                              "4.8",
-                              style: TextStyle(fontSize: 14),
+                              _myUser.rating
+                                  .toString(),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ],
                         ),
@@ -61,14 +79,21 @@ class HomeDrawer extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(AppRoutes.MYPROFILE);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyProfile(
+                          _myUser,
+                        ),
+                      ),
+                    );
+                    ;
                   },
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.person, size: 30),
                       SizedBox(width: 10),
@@ -80,10 +105,10 @@ class HomeDrawer extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.directions_car, size: 30),
                     SizedBox(width: 10),
@@ -94,10 +119,10 @@ class HomeDrawer extends StatelessWidget {
                     SizedBox(width: 20),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.logout, size: 30),
                     SizedBox(width: 10),

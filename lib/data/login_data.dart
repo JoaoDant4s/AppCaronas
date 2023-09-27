@@ -5,13 +5,13 @@ import 'package:caronas/models/user.dart';
 final loginData = [
   User(
     id: '1',
-    email: 'edvaldo@hotmail.com',
-    birth: DateTime(2000, 11, 09),
-    gender: 'Male',
-    name: 'Edvaldo',
-    password: 'edy',
-    image: File('assets/images/edvaldo.jpeg'),
-    rating: 4.5,
+    email: 'joao.dantas.017@ufrn.edu.br',
+    birth: DateTime(2001, 12, 29),
+    gender: 'Masculino',
+    name: 'João Dantas',
+    password: 'senha123',
+    image: File('assets/images/joao_dantas.jpg'),
+    rating: 4.2,
   ),
   User(
     id: '2',
