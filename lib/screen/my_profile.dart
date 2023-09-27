@@ -23,25 +23,25 @@ class MyProfile extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body:const SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Exibindo a imagem do usuário
+
             CircleAvatar(
               backgroundImage: AssetImage("assets/images/joao_dantas.jpg"),
             ),
             SizedBox(height: 16.0),
 
-            // Exibindo informações do usuário
-            Text('Nome: João Dantas', style: TextStyle(fontSize: 18.0)),
+
+            Text('Name: João Dantas', style: TextStyle(fontSize: 18.0)),
             Text('Email: joao.dantas@ufrn.edu.br',
                 style: TextStyle(fontSize: 18.0)),
-            Text('Gênero: Masculino', style: TextStyle(fontSize: 18.0)),
-            Text('Data de Nascimento: 29/12/2001',
+            Text('Gender: Male', style: TextStyle(fontSize: 18.0)),
+            Text('Date of birth: 29/12/2001',
                 style: TextStyle(fontSize: 18.0)),
-            Text('Avaliação: 4.8', style: TextStyle(fontSize: 18.0)),
+            Text('Rating: 4.8', style: TextStyle(fontSize: 18.0)),
             SizedBox(height: 16.0),
           ],
         ),

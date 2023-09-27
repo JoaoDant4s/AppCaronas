@@ -17,7 +17,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
       TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _birthdateController = TextEditingController();
-  String _selectedGender = 'Masculino';
+  String _selectedGender = 'Male';
 
   XFile? _imageFile;
 
@@ -82,22 +82,23 @@ class _CadastroLoginState extends State<CadastroLogin> {
         _confirmPasswordController.clear();
         _emailController.clear();
         _birthdateController.clear();
-        _selectedGender = 'Masculino';
+        _selectedGender = 'Male';
         _imageFile = null;
+        Navigator.pop(context);
       });
 
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Success'),
-            content: Text('User registered successfully!'),
+            title: const Text('Success'),
+            content: const Text('User registered successfully!'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -112,13 +113,13 @@ class _CadastroLoginState extends State<CadastroLogin> {
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         title:
-            Text('Login registration', style: TextStyle(color: Colors.white)),
+            const Text('Login registration', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -128,16 +129,16 @@ class _CadastroLoginState extends State<CadastroLogin> {
         child: Container(
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Form(
-              key: _formKey, // Associar a chave do formulário
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextFormField(
                     controller: _usernameController,
-                    decoration: InputDecoration(labelText: 'Username'),
+                    decoration: const InputDecoration(labelText: 'Username'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Username is required';
@@ -148,7 +149,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                   SizedBox(height: 20.0),
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         labelText: 'E-mail', hintText: 'example@example.com'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -157,11 +158,11 @@ class _CadastroLoginState extends State<CadastroLogin> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   TextFormField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),
                     ),
@@ -172,11 +173,11 @@ class _CadastroLoginState extends State<CadastroLogin> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   TextFormField(
                     controller: _confirmPasswordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Confirm password',
                       border: OutlineInputBorder(),
                     ),
@@ -190,12 +191,12 @@ class _CadastroLoginState extends State<CadastroLogin> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   TextFormField(
                     controller: _birthdateController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Birth date',
-                      hintText: 'MM/DD/AAAA',
+                      hintText: 'MM/DD/YYYY',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -204,10 +205,10 @@ class _CadastroLoginState extends State<CadastroLogin> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   DropdownButtonFormField(
                     value: _selectedGender,
-                    items: ['Masculino', 'Feminino', 'Outro'].map((gender) {
+                    items: ['Male', 'Female', 'Other'].map((gender) {
                       return DropdownMenuItem(
                         value: gender,
                         child: Text(gender),
@@ -225,7 +226,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: _pickImage,
                     style: ElevatedButton.styleFrom(
@@ -233,7 +234,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     child: Container(
                       width: double.infinity,
-                      child: Center(
+                      child: const Center(
                           child: Text(
                         'Select image',
                         style: TextStyle(color: Colors.white, fontSize: 20),
@@ -247,7 +248,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                         ? Image.file(File(_imageFile!.path), fit: BoxFit.cover)
                         : Placeholder(),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: _registerUser,
                     style: ElevatedButton.styleFrom(
@@ -255,7 +256,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     child: Container(
                       width: double.infinity,
-                      child: Center(
+                      child: const Center(
                           child: Text(
                         'Register',
                         style: TextStyle(color: Colors.white, fontSize: 20),
