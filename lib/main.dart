@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: MyTheme.customTheme,
-        initialRoute: '/',
+        initialRoute: '/login',
         routes: {
           AppRoutes.HOME: (context) => Home(),
           AppRoutes.LOGIN: (context) => Login(),
