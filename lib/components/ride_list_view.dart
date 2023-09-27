@@ -1,7 +1,7 @@
 import 'package:caronas/components/card.dart';
 import 'package:flutter/material.dart';
 import 'package:caronas/models/ride.dart';
-import 'package:caronas/screen/rideDetails.dart';
+import 'package:caronas/screen/ride_details.dart';
 
 class RideList extends StatelessWidget {
   final List<Ride> _rides;

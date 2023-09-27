@@ -1,6 +1,6 @@
 import 'package:caronas/screen/home.dart';
 import 'package:caronas/screen/login.dart';
-import 'package:caronas/screen/newAccount.dart';
+import 'package:caronas/screen/new_account.dart';
 import 'package:caronas/screen/register_ride.dart';
 import 'package:caronas/screen/search.dart';
 import 'package:caronas/theme/theme.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: MyTheme.customTheme,
-        initialRoute: '/',
+        initialRoute: '/login',
         routes: {
           AppRoutes.HOME: (context) => Home(),
           AppRoutes.LOGIN: (context) => Login(),
