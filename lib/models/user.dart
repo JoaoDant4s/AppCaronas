@@ -2,6 +2,7 @@ import 'dart:io';
 
 class User {
   String id;
+  String email;
   String name;
   String gender;
   DateTime birth;
@@ -11,6 +12,7 @@ class User {
 
   User({
     required this.id,
+    required this.email,
     required this.birth,
     required this.gender,
     required this.name,
