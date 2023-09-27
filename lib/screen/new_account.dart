@@ -72,6 +72,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
         password: password,
         image: _imageFile != null ? File(_imageFile!.path) : null,
         rating: 0.0,
+        car: null,
       );
 
       setState(() {
@@ -112,8 +113,8 @@ class _CadastroLoginState extends State<CadastroLogin> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        title:
-            const Text('Login registration', style: TextStyle(color: Colors.white)),
+        title: const Text('Login registration',
+            style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

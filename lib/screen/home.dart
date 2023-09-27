@@ -1,21 +1,18 @@
 import 'package:caronas/components/bottom_modal.dart';
 import 'package:caronas/components/drawer.dart';
+import 'package:caronas/models/user.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Home extends StatelessWidget {
+  final User user;
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+  Home(this.user);
   void _showBottomModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       clipBehavior: Clip.hardEdge,
       builder: (BuildContext context) {
-        return BottomModal();
+        return BottomModal(user);
       },
     );
   }
@@ -67,7 +64,7 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      drawer: HomeDrawer(),
+      drawer: HomeDrawer(user),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -82,22 +79,36 @@ class _HomeState extends State<Home> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Hello there!",
-                          style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500,),
+                          style: TextStyle(
+                            fontSize: 27,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        SizedBox(height: 30,),
-                        Text('How about we look for a ride?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey[700], fontSize: 12),)
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          'How about we look for a ride?',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(color: Colors.grey[700], fontSize: 18),
+                        )
                       ],
                     ),
                   ],
                 ),
               ),
-              Stack(children: <Widget>[Image(image: AssetImage("assets/images/3dcar.png"),width: 800,fit: BoxFit.cover,),
-
-              ],)
+              Stack(
+                children: <Widget>[
+                  Image(
+                    image: AssetImage("assets/images/3dcar.png"),
+                    width: 800,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              )
             ],
           ),
         ),

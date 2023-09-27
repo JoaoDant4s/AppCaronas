@@ -6,23 +6,10 @@ import 'package:caronas/screen/my_profile.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
-class HomeDrawer extends StatefulWidget {
-  const HomeDrawer({super.key});
+class HomeDrawer extends StatelessWidget {
+  final User _myUser;
 
-  @override
-  State<HomeDrawer> createState() => _HomeDrawerState();
-}
-
-class _HomeDrawerState extends State<HomeDrawer> {
-  User _myUser = loginData[0];
-
-  @override
-  void initState() {
-    super.initState();
-    if (loginData.isNotEmpty) {
-      _myUser = loginData.first;
-    }
-  }
+  HomeDrawer(this._myUser);
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +35,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         backgroundImage: AssetImage(_myUser.image!.path),
                       ),
                     ),
-                    const SizedBox(
-                        width: 10),
+                    const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -69,8 +55,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              _myUser.rating
-                                  .toString(),
+                              _myUser.rating.toString(),
                               style: const TextStyle(fontSize: 14),
                             ),
                           ],
@@ -91,7 +76,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         ),
                       ),
                     );
-
                   },
                   child: const Row(
                     children: [
@@ -122,11 +106,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 const SizedBox(
                   height: 20,
                 ),
-                 InkWell(
-                     onTap: () {
-                       Navigator.popUntil(context, ModalRoute.withName("/login"));
-                     },
-                   child: const Row(
+                InkWell(
+                  onTap: () {
+                    Navigator.popUntil(context, ModalRoute.withName("/login"));
+                  },
+                  child: const Row(
                     children: [
                       Icon(Icons.logout, size: 30),
                       SizedBox(width: 10),
@@ -135,8 +119,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
-                ),
-                 )
+                  ),
+                )
               ],
             ),
           ],

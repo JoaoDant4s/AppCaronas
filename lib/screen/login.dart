@@ -1,8 +1,10 @@
+import 'package:caronas/screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:caronas/data/login_data.dart';
 import 'package:caronas/screen/new_account.dart';
 import 'package:caronas/models/user.dart';
+
 class Login extends StatefulWidget {
   const Login({Key? key});
 
@@ -16,15 +18,13 @@ class _LoginState extends State<Login> {
 
   final _formKey = GlobalKey<FormState>();
 
-  bool verifyCredentials(String email, String password) {
-
+  User? verifyCredentials(String email, String password) {
     for (User user in loginData) {
-
       if (user.email == email && user.password == password) {
-        return true;
+        return user;
       }
     }
-    return false;
+    return null;
   }
 
   @override
@@ -121,12 +121,17 @@ class _LoginState extends State<Login> {
                           if (_formKey.currentState!.validate()) {
                             String email = _emailController.text;
                             String password = _passwordController.text;
-
-                            if (verifyCredentials(email, password)) {
-
-                              Navigator.of(context).pushNamed(AppRoutes.HOME);
+                            var userMatched =
+                                verifyCredentials(email, password);
+                            if (userMatched is User) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => Home(
+                                    userMatched,
+                                  ),
+                                ),
+                              );
                             } else {
-
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text(
@@ -140,22 +145,20 @@ class _LoginState extends State<Login> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
-                        child:const Padding(
+                        child: const Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Text(
                             'Log In',
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
                     ),
                   ),
-                 const SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(AppRoutes.NEWACCOUNT);
+                      Navigator.of(context).pushNamed(AppRoutes.NEWACCOUNT);
                     },
                     child: const Text(
                       'Create new account',

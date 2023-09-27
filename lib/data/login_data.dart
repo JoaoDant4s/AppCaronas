@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:caronas/data/cars.dart';
+import 'package:caronas/data/my_cards.dart';
+import 'package:caronas/models/car.dart';
 import 'package:caronas/models/user.dart';
 
 final loginData = [
@@ -12,16 +15,18 @@ final loginData = [
     password: 'senha123',
     image: File('assets/images/joao_dantas.jpg'),
     rating: 4.2,
+    car: carsData[0],
   ),
   User(
     id: '2',
-    email: 'usuario2@example.com',
-    birth: DateTime(1985, 8, 22),
-    gender: 'Female',
-    name: 'User 2',
-    password: 'password456',
-    image: File('/path/to/image2.png'),
-    rating: 4.2,
+    email: 'edvaldo@hotmail.com',
+    birth: DateTime(2000, 11, 09),
+    gender: 'Male',
+    name: 'Edvaldo',
+    password: 'edy',
+    image: File('assets/images/edvaldo.jpeg'),
+    rating: 4.5,
+    car: null,
   ),
   User(
     id: '3',
@@ -32,6 +37,7 @@ final loginData = [
     password: 'password789',
     image: File('/path/to/image3.png'),
     rating: 4.7,
+    car: null,
   ),
   User(
     id: '4',
@@ -42,6 +48,7 @@ final loginData = [
     password: 'passwordabc',
     image: File('/path/to/image4.png'),
     rating: 4.0,
+    car: null,
   ),
   User(
     id: '5',
@@ -52,6 +59,7 @@ final loginData = [
     password: 'passwordxyz',
     image: File('/path/to/image5.png'),
     rating: 4.9,
+    car: null,
   ),
   User(
     id: '6',
@@ -62,6 +70,7 @@ final loginData = [
     password: 'passwordmno',
     image: File('/path/to/image6.png'),
     rating: 3.8,
+    car: null,
   ),
   User(
     id: '7',
@@ -72,6 +81,7 @@ final loginData = [
     password: 'password789',
     image: File('/path/to/image7.png'),
     rating: 3.5,
+    car: null,
   ),
   User(
     id: '8',
@@ -82,6 +92,7 @@ final loginData = [
     password: 'passwordxyz',
     image: File('/path/to/image8.png'),
     rating: 4.8,
+    car: null,
   ),
   User(
     id: '9',
@@ -92,6 +103,7 @@ final loginData = [
     password: 'passwordmnp',
     image: File('/path/to/image9.png'),
     rating: 4.2,
+    car: null,
   ),
   User(
     id: '10',
@@ -102,5 +114,6 @@ final loginData = [
     password: 'passwordjkl',
     image: File('/path/to/image10.png'),
     rating: 4.6,
+    car: null,
   ),
 ];
