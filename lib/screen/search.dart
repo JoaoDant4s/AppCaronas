@@ -80,7 +80,7 @@ class _SearchState extends State<Search> {
             visible: _filteredRides.isEmpty,
             child: const Center(
               child: Text(
-                "Nenhuma carona encontrada",
+                "No rides found",
                 style: TextStyle(
                     fontSize: 20,
                     color: Color(0xFF09C184),

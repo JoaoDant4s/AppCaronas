@@ -30,7 +30,7 @@ class HomeDrawer extends StatelessWidget {
                             AssetImage("assets/images/joao_dantas.jpg"),
                       ),
                     ),
-                    SizedBox(width: 10), // Espaçamento entre a foto e o texto
+                    SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -52,7 +52,7 @@ class HomeDrawer extends StatelessWidget {
                             ),
                             SizedBox(width: 5),
                             Text(
-                              "4.8", // Formata a avaliação para uma casa decimal
+                              "4.8",
                               style: TextStyle(fontSize: 14),
                             ),
                           ],

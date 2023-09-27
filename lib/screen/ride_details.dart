@@ -31,54 +31,54 @@ class RideDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Origem:',
+           const Text(
+              'Origin:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               ride.origin,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Destino:',
+            const SizedBox(height: 16),
+           const Text(
+              'Destination:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               ride.destiny,
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Data:',
+            const SizedBox(height: 16),
+            const Text(
+              'Date:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               '${ride.date.day}/${ride.date.month}',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Preço:',
+            const SizedBox(height: 16),
+            const Text(
+              'Price:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               'R\$ ${ride.price.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 16),
+              style:const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Assentos disponíveis:',
+           const SizedBox(height: 16),
+            const Text(
+              'Available seats:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 4),
+           const SizedBox(height: 4),
             Text(
               ride.seats.toString(),
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
