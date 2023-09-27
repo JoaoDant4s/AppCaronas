@@ -1,18 +1,46 @@
+import 'package:caronas/models/user.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class BottomModal extends StatelessWidget {
-  const BottomModal({super.key});
-  BoxDecoration myBoxDecoration(){
+  final User user;
+  BottomModal(this.user);
+
+  BoxDecoration myBoxDecoration() {
     return BoxDecoration(
-        border: Border(top: BorderSide(
-          color: Colors.black,
-          width: 3.0,
-        ))
-    );
+        border: Border(
+            top: BorderSide(
+      color: Colors.black,
+      width: 3.0,
+    )));
   }
+
+  bool checkUserCar() {
+    return user.car != null ? true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
+    myDialog() {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Failed'),
+            content: const Text('The user doesnt has car'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Container(
       height: 300,
       decoration: BoxDecoration(
@@ -47,7 +75,9 @@ class BottomModal extends StatelessWidget {
                       ),
                       const Text(
                         "Passenger",
-                        style: TextStyle(fontSize: 20,),
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
                       )
                     ],
                   ),
@@ -78,6 +108,11 @@ class BottomModal extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
+                    bool hasCar = checkUserCar();
+                    if (!hasCar) {
+                      myDialog();
+                      return;
+                    }
                     Navigator.of(context).pushNamed(AppRoutes.REGISTER);
                   },
                 ),

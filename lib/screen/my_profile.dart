@@ -38,9 +38,8 @@ class MyProfile extends StatelessWidget {
                   Container(
                     width: 120,
                     height: 120,
-                    child: const CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/joao_dantas.jpg'),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(user.image!.path),
                     ),
                   ),
                   const SizedBox(height: 16.0),

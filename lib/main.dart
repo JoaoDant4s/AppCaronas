@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         theme: MyTheme.customTheme,
         initialRoute: '/login',
         routes: {
-          AppRoutes.HOME: (context) => Home(),
           AppRoutes.LOGIN: (context) => Login(),
           AppRoutes.SEARCH: (context) => Search(),
           AppRoutes.REGISTER: (context) => Register(),

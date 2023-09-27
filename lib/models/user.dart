@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:caronas/models/car.dart';
+
 class User {
   String id;
   String email;
@@ -9,6 +11,7 @@ class User {
   String password;
   File? image;
   double rating;
+  Car? car;
 
   User({
     required this.id,
@@ -19,5 +22,6 @@ class User {
     required this.password,
     required this.image,
     required this.rating,
+    required this.car,
   });
 }
