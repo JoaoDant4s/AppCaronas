@@ -1,7 +1,10 @@
+import 'package:caronas/models/user.dart';
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatelessWidget {
-  const MyProfile({super.key});
+  final User user;
+
+  MyProfile(this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -23,26 +26,39 @@ class MyProfile extends StatelessWidget {
           ),
         ),
       ),
-      body:const SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/joao_dantas.jpg"),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 120,
+                    height: 120,
+                    child: const CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/images/joao_dantas.jpg'),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  Text('Name: ${user.name}',
+                      style: const TextStyle(fontSize: 18.0)),
+                  Text('Email: ${user.email}',
+                      style: const TextStyle(fontSize: 18.0)),
+                  Text('Gender: ${user.gender}',
+                      style: const TextStyle(fontSize: 18.0)),
+                  Text(
+                      'Birth Date: ${user.birth.day}/${user.birth.month}/${user.birth.year}',
+                      style: const TextStyle(fontSize: 18.0)),
+                  Text('Rating: ${user.rating}',
+                      style: const TextStyle(fontSize: 18.0)),
+                  const SizedBox(height: 16.0),
+                ],
+              ),
             ),
-            SizedBox(height: 16.0),
-
-
-            Text('Name: João Dantas', style: TextStyle(fontSize: 18.0)),
-            Text('Email: joao.dantas@ufrn.edu.br',
-                style: TextStyle(fontSize: 18.0)),
-            Text('Gender: Male', style: TextStyle(fontSize: 18.0)),
-            Text('Date of birth: 29/12/2001',
-                style: TextStyle(fontSize: 18.0)),
-            Text('Rating: 4.8', style: TextStyle(fontSize: 18.0)),
-            SizedBox(height: 16.0),
           ],
         ),
       ),
