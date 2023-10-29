@@ -1,18 +1,18 @@
-import 'dart:io';
-import 'package:caronas/data/login_data.dart';
-import 'package:caronas/models/app_user.dart';
 import 'package:caronas/screen/my_profile.dart';
-import 'package:caronas/utils/app_routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/utils/first_last_name.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
-  final AppUser _myUser;
-
-  HomeDrawer(this._myUser);
-
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Provider.of<AuthService>(context, listen: true);
+
+    void logOut() async {
+      await authService.signOut();
+    }
+
     return Drawer(
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
@@ -25,27 +25,35 @@ class HomeDrawer extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Container(
-                    //   width: 60,
-                    //   height: 60,
-                    //   decoration: const BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //   ),
-                    //   child: CircleAvatar(
-                    //     backgroundImage: AssetImage(_myUser.image!.path),
-                    //   ),
-                    // ),
+                    Container(
+                        width: 60,
+                        height: 60,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: ClipOval(
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundImage:
+                                Image.network(authService.user!.image).image,
+                          ),
+                        )),
                     const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Text(
-                        //   _myUser.name,
-                        //   style: const TextStyle(
-                        //     fontWeight: FontWeight.bold,
-                        //     fontSize: 16,
-                        //   ),
-                        // ),
+                        Container(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 120),
+                            child: Text(
+                              getFirstAndLastName(authService.user!.name),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
                         Row(
                           children: [
                             const Icon(
@@ -54,10 +62,10 @@ class HomeDrawer extends StatelessWidget {
                               size: 20,
                             ),
                             const SizedBox(width: 5),
-                            // Text(
-                            //   _myUser.rating.toString(),
-                            //   style: const TextStyle(fontSize: 14),
-                            // ),
+                            Text(
+                              authService.user!.rating.toString(),
+                              style: const TextStyle(fontSize: 14),
+                            ),
                           ],
                         ),
                       ],
@@ -72,7 +80,7 @@ class HomeDrawer extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MyProfile(
-                          _myUser,
+                          authService.user!,
                         ),
                       ),
                     );
@@ -107,9 +115,7 @@ class HomeDrawer extends StatelessWidget {
                   height: 20,
                 ),
                 InkWell(
-                  onTap: () {
-                    Navigator.popUntil(context, ModalRoute.withName("/login"));
-                  },
+                  onTap: logOut,
                   child: const Row(
                     children: [
                       Icon(Icons.logout, size: 30),

@@ -22,12 +22,10 @@ class _CadastroLoginState extends State<CadastroLogin> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _birthdateController = TextEditingController();
   String _selectedGender = 'Male';
-
   XFile? _imageFile;
-
   final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
-
   final _formKey = GlobalKey<FormState>();
+  final loading = ValueNotifier<bool>(false);
 
   void initState() {
     super.initState();
@@ -77,6 +75,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
 
     void registerUser() async {
       if (_formKey.currentState!.validate()) {
+        loading.value = true;
         String username = _usernameController.text;
         String password = _passwordController.text;
         String email = _emailController.text;
@@ -121,6 +120,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
             );
           }
         }
+        loading.value = false;
       }
     }
 
@@ -261,7 +261,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     width: 152,
                     child: _imageFile != null
                         ? Image.file(File(_imageFile!.path), fit: BoxFit.cover)
-                        : Placeholder(),
+                        : const Placeholder(),
                   ),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
@@ -271,11 +271,28 @@ class _CadastroLoginState extends State<CadastroLogin> {
                     ),
                     child: Container(
                       width: double.infinity,
-                      child: const Center(
-                          child: Text(
-                        'Register',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      )),
+                      child: Center(
+                        child: AnimatedBuilder(
+                          animation: loading,
+                          builder: (context, _) {
+                            return loading.value
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const Text(
+                                    'Register',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ],

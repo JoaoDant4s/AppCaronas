@@ -172,6 +172,8 @@ String getErrorMessage(String errorCode) {
       return 'The used credential does not have permission to access the requested resource.';
     case 'internal-error':
       return 'The authentication server encountered an unexpected error while trying to process the request.';
+    case 'INVALID_LOGIN_CREDENTIALS':
+      return 'Invalid email or password';
     default:
       return 'Internal Server Error';
   }

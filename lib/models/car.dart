@@ -18,4 +18,14 @@ class Car {
     required this.brand,
     required this.userID,
   });
+
+  Car.fromMap(Map<String, dynamic> map)
+      : id = map['id'],
+        model = map['model'],
+        licensePlate = map['licensePlate'],
+        age = map['age'],
+        availableSeats = map['availableSeats'],
+        color = map['color'],
+        brand = map['brand'],
+        userID = map['userID'];
 }

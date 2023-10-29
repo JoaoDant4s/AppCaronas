@@ -29,6 +29,20 @@ Future<void> createUserData(AppUser user, String uid, XFile? image) async {
   }
 }
 
+Future<AppUser?> getUserDataByUID(String uid) async {
+  try {
+    final docRef = db.collection("user").doc(uid).withConverter(
+          fromFirestore: AppUser.fromFirestore,
+          toFirestore: (AppUser user, _) => user.toFirestore(),
+        );
+    final docSnapshot = await docRef.get();
+    AppUser? appUser = docSnapshot.data();
+    return appUser;
+  } on FirebaseException catch (e) {
+    throw UserDataException("Error fetching user data");
+  }
+}
+
 Future<String> uploadPhoto(String path, String uid) async {
   File file = File(path);
 

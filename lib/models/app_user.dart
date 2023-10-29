@@ -37,14 +37,20 @@ class AppUser {
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
+    Timestamp birthTimestamp = data?['birth'];
+    DateTime birthDate = birthTimestamp.toDate();
+
+    Car? car = data?['car'] != null ? Car.fromMap(data?['car']) : null;
+
     return AppUser(
+      id: snapshot.id,
       email: data?['email'],
-      birth: data?['birth'],
+      birth: birthDate,
       name: data?['name'],
       gender: data?['gender'],
-      image: '',
+      image: data?['image'],
       rating: data?['rating'],
-      car: data?['car'] ?? {},
+      car: car,
     );
   }
 
