@@ -1,25 +1,24 @@
 import 'package:caronas/components/bottom_modal.dart';
 import 'package:caronas/components/drawer.dart';
-import 'package:caronas/models/app_user.dart';
+import 'package:caronas/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
-  final AppUser? user;
-
-  Home(this.user);
-  void _showBottomModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      clipBehavior: Clip.hardEdge,
-      builder: (BuildContext context) {
-        return BottomModal(user!);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Provider.of<AuthService>(context, listen: true);
+
+    void _showBottomModal(BuildContext context) {
+      showModalBottomSheet(
+        context: context,
+        clipBehavior: Clip.hardEdge,
+        builder: (BuildContext context) {
+          return BottomModal(authService.user!);
+        },
+      );
+    }
+
     return Scaffold(
       floatingActionButton: Container(
         width: 70,
@@ -65,7 +64,7 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      drawer: HomeDrawer(user!),
+      drawer: HomeDrawer(),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

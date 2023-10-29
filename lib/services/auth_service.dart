@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:caronas/errors/AuthException.dart';
 import 'package:caronas/errors/FirebaseErrors.dart';
 import 'package:caronas/models/app_user.dart';
@@ -18,25 +16,26 @@ class AuthService extends ChangeNotifier {
   var userIsAuthenticated = false;
 
   AuthService() {
-    _auth.authStateChanges().listen((user) {
-      print("dentro do authStateChanges");
-      // if (user != null) {
-      //   _user = user;
-      //   userIsAuthenticated = true;
-      // } else {
-      //   userIsAuthenticated = false;
-      // }
-      // notifyListeners();
-      print("teste");
+    _auth.authStateChanges().listen((user) async {
+      if (user != null) {
+        AppUser? appUser =
+            await getUserDataByUID(user.uid.characters.toString());
+        if (appUser != null) {
+          _user = appUser;
+          userIsAuthenticated = true;
+        }
+      } else {
+        userIsAuthenticated = false;
+      }
+      notifyListeners();
     });
   }
 
-  Future<String> signIn(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return 'User created successfuly';
-    } catch (e) {
-      return e.toString();
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(getErrorMessage(e.code));
     }
   }
 

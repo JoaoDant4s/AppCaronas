@@ -1,9 +1,9 @@
-import 'package:caronas/screen/home.dart';
-import 'package:flutter/material.dart';
+import 'package:caronas/components/snackbar.dart';
+import 'package:caronas/errors/AuthException.dart';
+import 'package:caronas/services/auth_service.dart';
 import 'package:caronas/utils/app_routes.dart';
-import 'package:caronas/data/login_data.dart';
-import 'package:caronas/screen/new_account.dart';
-import 'package:caronas/models/app_user.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key});
@@ -18,17 +18,32 @@ class _LoginState extends State<Login> {
 
   final _formKey = GlobalKey<FormState>();
 
-  // User? verifyCredentials(String email, String password) {
-  //   for (User user in loginData) {
-  //     if (user.email == email && user.password == password) {
-  //       return user;
-  //     }
-  //   }
-  //   return null;
-  // }
-
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Provider.of<AuthService>(context, listen: false);
+    final loading = ValueNotifier<bool>(false);
+
+    void logIn() async {
+      if (_formKey.currentState!.validate()) {
+        loading.value = true;
+        String email = _emailController.text;
+        String password = _passwordController.text;
+        try {
+          await authService.signIn(email, password);
+          loading.value = false;
+        } catch (error) {
+          if (error is AuthException) {
+            CustomSnackBar.showSnackBar(
+              context,
+              error.message,
+              Colors.red,
+              Colors.white,
+            );
+          }
+        }
+      }
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: Container(
@@ -117,39 +132,29 @@ class _LoginState extends State<Login> {
                     child: Container(
                       color: Colors.white,
                       child: ElevatedButton(
-                        onPressed: () {
-                          // if (_formKey.currentState!.validate()) {
-                          //   String email = _emailController.text;
-                          //   String password = _passwordController.text;
-                          //   var userMatched =
-                          //       verifyCredentials(email, password);
-                          //   if (userMatched is User) {
-                          //     Navigator.of(context).push(
-                          //       MaterialPageRoute(
-                          //         builder: (context) => Home(
-                          //           userMatched,
-                          //         ),
-                          //       ),
-                          //     );
-                          //   } else {
-                          //     ScaffoldMessenger.of(context).showSnackBar(
-                          //       const SnackBar(
-                          //         content: Text(
-                          //           'Invalid credentials. Check your email and password.',
-                          //         ),
-                          //       ),
-                          //     );
-                          //   }
-                          // }
-                        },
+                        onPressed: logIn,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
-                        child: const Padding(
+                        child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            'Log In',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          child: AnimatedBuilder(
+                            animation: loading,
+                            builder: (context, _) {
+                              return loading.value
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : const Text(
+                                      'Log In',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    );
+                            },
                           ),
                         ),
                       ),
