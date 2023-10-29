@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:caronas/data/login_data.dart';
 import 'package:caronas/screen/new_account.dart';
-import 'package:caronas/models/user.dart';
+import 'package:caronas/models/app_user.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key});
@@ -18,14 +18,14 @@ class _LoginState extends State<Login> {
 
   final _formKey = GlobalKey<FormState>();
 
-  User? verifyCredentials(String email, String password) {
-    for (User user in loginData) {
-      if (user.email == email && user.password == password) {
-        return user;
-      }
-    }
-    return null;
-  }
+  // User? verifyCredentials(String email, String password) {
+  //   for (User user in loginData) {
+  //     if (user.email == email && user.password == password) {
+  //       return user;
+  //     }
+  //   }
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -118,29 +118,29 @@ class _LoginState extends State<Login> {
                       color: Colors.white,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            String email = _emailController.text;
-                            String password = _passwordController.text;
-                            var userMatched =
-                                verifyCredentials(email, password);
-                            if (userMatched is User) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => Home(
-                                    userMatched,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Invalid credentials. Check your email and password.',
-                                  ),
-                                ),
-                              );
-                            }
-                          }
+                          // if (_formKey.currentState!.validate()) {
+                          //   String email = _emailController.text;
+                          //   String password = _passwordController.text;
+                          //   var userMatched =
+                          //       verifyCredentials(email, password);
+                          //   if (userMatched is User) {
+                          //     Navigator.of(context).push(
+                          //       MaterialPageRoute(
+                          //         builder: (context) => Home(
+                          //           userMatched,
+                          //         ),
+                          //       ),
+                          //     );
+                          //   } else {
+                          //     ScaffoldMessenger.of(context).showSnackBar(
+                          //       const SnackBar(
+                          //         content: Text(
+                          //           'Invalid credentials. Check your email and password.',
+                          //         ),
+                          //       ),
+                          //     );
+                          //   }
+                          // }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,

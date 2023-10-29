@@ -1,9 +1,13 @@
+import 'dart:io';
+
+import 'package:caronas/components/snackbar.dart';
+import 'package:caronas/errors/AuthException.dart';
+import 'package:caronas/models/app_user.dart';
+import 'package:caronas/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:caronas/models/user.dart';
-import 'package:caronas/data/login_data.dart';
-import 'dart:io';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CadastroLogin extends StatefulWidget {
   @override
@@ -28,6 +32,18 @@ class _CadastroLoginState extends State<CadastroLogin> {
   void initState() {
     super.initState();
     _birthdateController.addListener(_formatBirthdate);
+  }
+
+  void resetInputs() {
+    setState(() {
+      _usernameController.clear();
+      _passwordController.clear();
+      _confirmPasswordController.clear();
+      _emailController.clear();
+      _birthdateController.clear();
+      _selectedGender = 'Male';
+      _imageFile = null;
+    });
   }
 
   void _formatBirthdate() {
@@ -55,61 +71,59 @@ class _CadastroLoginState extends State<CadastroLogin> {
     }
   }
 
-  void _registerUser() {
-    if (_formKey.currentState!.validate()) {
-      String username = _usernameController.text;
-      String password = _passwordController.text;
-      String email = _emailController.text;
-      String birthdate = _birthdateController.text;
-      String gender = _selectedGender;
-
-      User newUser = User(
-        id: UniqueKey().toString(),
-        email: email,
-        birth: _dateFormat.parse(birthdate),
-        gender: gender,
-        name: username,
-        password: password,
-        image: _imageFile != null ? File(_imageFile!.path) : null,
-        rating: 0.0,
-        car: null,
-      );
-
-      setState(() {
-        loginData.add(newUser);
-
-        _usernameController.clear();
-        _passwordController.clear();
-        _confirmPasswordController.clear();
-        _emailController.clear();
-        _birthdateController.clear();
-        _selectedGender = 'Male';
-        _imageFile = null;
-        Navigator.pop(context);
-      });
-
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Success'),
-            content: const Text('User registered successfully!'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Provider.of<AuthService>(context, listen: false);
+
+    void registerUser() async {
+      if (_formKey.currentState!.validate()) {
+        String username = _usernameController.text;
+        String password = _passwordController.text;
+        String email = _emailController.text;
+        String birthdate = _birthdateController.text;
+        String gender = _selectedGender;
+
+        AppUser newUser = AppUser(
+          id: UniqueKey().toString(),
+          email: email,
+          birth: _dateFormat.parse(birthdate),
+          gender: gender,
+          name: username,
+          password: password,
+          image: '',
+          rating: 0.0,
+          car: null,
+        );
+        try {
+          await authService.createUser(newUser, _imageFile);
+          CustomSnackBar.showSnackBar(
+            context,
+            "User created successfuly",
+            Colors.green,
+            Colors.white,
+          );
+          resetInputs();
+          Navigator.of(context).pop();
+        } catch (error) {
+          if (error is AuthException) {
+            CustomSnackBar.showSnackBar(
+              context,
+              error.message,
+              Colors.red,
+              Colors.white,
+            );
+          } else {
+            CustomSnackBar.showSnackBar(
+              context,
+              "Internal server error",
+              Colors.red,
+              Colors.white,
+            );
+          }
+        }
+      }
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
@@ -251,7 +265,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
                   ),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: _registerUser,
+                    onPressed: registerUser,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                     ),

@@ -1,9 +1,9 @@
-import 'package:caronas/models/user.dart';
+import 'package:caronas/models/app_user.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class BottomModal extends StatelessWidget {
-  final User user;
+  final AppUser user;
   BottomModal(this.user);
 
   BoxDecoration myBoxDecoration() {
