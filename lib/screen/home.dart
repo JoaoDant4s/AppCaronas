@@ -1,10 +1,11 @@
 import 'package:caronas/components/bottom_modal.dart';
 import 'package:caronas/components/drawer.dart';
-import 'package:caronas/models/user.dart';
+import 'package:caronas/models/app_user.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatelessWidget {
-  final User user;
+  final AppUser? user;
 
   Home(this.user);
   void _showBottomModal(BuildContext context) {
@@ -12,7 +13,7 @@ class Home extends StatelessWidget {
       context: context,
       clipBehavior: Clip.hardEdge,
       builder: (BuildContext context) {
-        return BottomModal(user);
+        return BottomModal(user!);
       },
     );
   }
@@ -64,7 +65,7 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      drawer: HomeDrawer(user),
+      drawer: HomeDrawer(user!),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

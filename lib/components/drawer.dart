@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:caronas/data/login_data.dart';
-import 'package:caronas/models/user.dart';
+import 'package:caronas/models/app_user.dart';
 import 'package:caronas/screen/my_profile.dart';
 import 'package:caronas/utils/app_routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
-  final User _myUser;
+  final AppUser _myUser;
 
   HomeDrawer(this._myUser);
 
@@ -25,27 +25,27 @@ class HomeDrawer extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(_myUser.image!.path),
-                      ),
-                    ),
+                    // Container(
+                    //   width: 60,
+                    //   height: 60,
+                    //   decoration: const BoxDecoration(
+                    //     shape: BoxShape.circle,
+                    //   ),
+                    //   child: CircleAvatar(
+                    //     backgroundImage: AssetImage(_myUser.image!.path),
+                    //   ),
+                    // ),
                     const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          _myUser.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
+                        // Text(
+                        //   _myUser.name,
+                        //   style: const TextStyle(
+                        //     fontWeight: FontWeight.bold,
+                        //     fontSize: 16,
+                        //   ),
+                        // ),
                         Row(
                           children: [
                             const Icon(
@@ -54,10 +54,10 @@ class HomeDrawer extends StatelessWidget {
                               size: 20,
                             ),
                             const SizedBox(width: 5),
-                            Text(
-                              _myUser.rating.toString(),
-                              style: const TextStyle(fontSize: 14),
-                            ),
+                            // Text(
+                            //   _myUser.rating.toString(),
+                            //   style: const TextStyle(fontSize: 14),
+                            // ),
                           ],
                         ),
                       ],

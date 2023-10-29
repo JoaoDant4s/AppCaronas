@@ -1,6 +1,6 @@
 # caronas
 
-Projeto colaborativo para a disciplina de Desenvolvimento de Sistemas para Dispositivos Móveis.
+A new Flutter project.
 
 ## Getting Started
 

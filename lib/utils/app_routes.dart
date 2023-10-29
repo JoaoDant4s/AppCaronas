@@ -1,5 +1,3 @@
-import 'package:caronas/screen/search.dart';
-
 class AppRoutes {
   static const HOME = '/';
   static const LOGIN = '/login';

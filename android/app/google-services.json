@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "755873719582",
+    "project_id": "easyride-987d0",
+    "storage_bucket": "easyride-987d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755873719582:android:e04fc656126d5a2c6a550f",
+        "android_client_info": {
+          "package_name": "com.company.easyride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755873719582-kgmafgmkcj7jn52nud4jgtu16lupenti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDstiPbnznX6ynGccDcd0uJFbz5lVglBsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755873719582-kgmafgmkcj7jn52nud4jgtu16lupenti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "755873719582-h3tkcvp1d98rn0ftt5kndqiq0k1k64bb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.caronas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755873719582:android:a3e6b2dacfd409de6a550f",
+        "android_client_info": {
+          "package_name": "com.example.caronas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755873719582-kgmafgmkcj7jn52nud4jgtu16lupenti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDstiPbnznX6ynGccDcd0uJFbz5lVglBsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755873719582-kgmafgmkcj7jn52nud4jgtu16lupenti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "755873719582-h3tkcvp1d98rn0ftt5kndqiq0k1k64bb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.caronas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

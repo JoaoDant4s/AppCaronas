@@ -1,8 +1,8 @@
-import 'package:caronas/models/user.dart';
+import 'package:caronas/models/app_user.dart';
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatelessWidget {
-  final User user;
+  final AppUser user;
 
   MyProfile(this.user);
 
@@ -35,13 +35,13 @@ class MyProfile extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 120,
-                    height: 120,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(user.image!.path),
-                    ),
-                  ),
+                  // Container(
+                  //   width: 120,
+                  //   height: 120,
+                  //   child: CircleAvatar(
+                  //     backgroundImage: AssetImage(user.image!.path),
+                  //   ),
+                  // ),
                   const SizedBox(height: 16.0),
                   Text('Name: ${user.name}',
                       style: const TextStyle(fontSize: 18.0)),
