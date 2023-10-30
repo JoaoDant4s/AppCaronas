@@ -83,9 +83,10 @@ class _SearchState extends State<Search> {
               child: Text(
                 "No rides found",
                 style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFF09C184),
-                    fontWeight: FontWeight.bold),
+                  fontSize: 20,
+                  color: Color(0xFF09C184),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

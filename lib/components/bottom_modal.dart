@@ -1,6 +1,8 @@
 import 'package:caronas/models/app_user.dart';
+import 'package:caronas/services/auth_service.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomModal extends StatelessWidget {
   final AppUser user;
@@ -15,7 +17,7 @@ class BottomModal extends StatelessWidget {
     )));
   }
 
-  bool checkUserCar() {
+  bool checkUserCar(AppUser user) {
     return user.car != null ? true : false;
   }
 
@@ -27,13 +29,19 @@ class BottomModal extends StatelessWidget {
         builder: (context) {
           return AlertDialog(
             title: const Text('Failed'),
-            content: const Text('The user doesnt has car'),
+            content: const Text('The user does not has a car'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('OK'),
+                child: const Text('LATER'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.NEWCAR);
+                },
+                child: const Text('CREATE'),
               ),
             ],
           );
@@ -66,7 +74,7 @@ class BottomModal extends StatelessWidget {
                       Container(
                         width: 120.0,
                         height: 120.0,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/gifs/espanhol.gif"),
                             fit: BoxFit.cover,
@@ -87,33 +95,37 @@ class BottomModal extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: GestureDetector(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 120.0,
-                        height: 120.0,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/gifs/volante.gif"),
-                            fit: BoxFit.cover,
+                child: Consumer<AuthService>(
+                  builder: (context, auth_service, child) {
+                    return GestureDetector(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 120.0,
+                            height: 120.0,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/gifs/volante.gif"),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                        ),
+                          const Text(
+                            "Driver",
+                            style: TextStyle(fontSize: 20),
+                          )
+                        ],
                       ),
-                      const Text(
-                        "Driver",
-                        style: TextStyle(fontSize: 20),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    bool hasCar = checkUserCar();
-                    if (!hasCar) {
-                      myDialog();
-                      return;
-                    }
-                    Navigator.of(context).pushNamed(AppRoutes.REGISTER);
+                      onTap: () {
+                        bool hasCar = checkUserCar(auth_service.user!);
+                        if (!hasCar) {
+                          myDialog();
+                          return;
+                        }
+                        Navigator.of(context).pushNamed(AppRoutes.REGISTER);
+                      },
+                    );
                   },
                 ),
               )

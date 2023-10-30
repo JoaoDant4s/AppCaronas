@@ -69,6 +69,7 @@ flutter:
     - assets/images/car2d.png
     - assets/images/joao_dantas.jpg
     - assets/images/edvaldo.jpeg
+    - assets/images/register_car.png
   fonts:
     - family: Poppins
       fonts:

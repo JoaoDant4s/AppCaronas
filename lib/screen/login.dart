@@ -30,7 +30,6 @@ class _LoginState extends State<Login> {
         String password = _passwordController.text;
         try {
           await authService.signIn(email, password);
-          loading.value = false;
         } catch (error) {
           if (error is AuthException) {
             CustomSnackBar.showSnackBar(
