@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.0.5
   cloud_firestore: ^4.12.1
   firebase_storage: ^11.4.0
+  firebase_app_check: ^0.2.1+2
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
     - assets/images/car2d.png
     - assets/images/joao_dantas.jpg
     - assets/images/edvaldo.jpeg
+    - assets/images/register_car.png
   fonts:
     - family: Poppins
       fonts:

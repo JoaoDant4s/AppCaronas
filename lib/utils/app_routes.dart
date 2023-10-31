@@ -6,4 +6,5 @@ class AppRoutes {
   static const REGISTER = '/register';
   static const NEWACCOUNT = '/newAccount';
   static const MYPROFILE = '/myProfile';
+  static const NEWCAR = '/newCar';
 }

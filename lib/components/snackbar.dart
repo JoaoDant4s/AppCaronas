@@ -13,7 +13,7 @@ class CustomSnackBar {
         duration: const Duration(seconds: 5),
         behavior: SnackBarBehavior.floating,
         action: SnackBarAction(
-          label: 'Fechar',
+          label: 'Close',
           textColor: Colors.white,
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();

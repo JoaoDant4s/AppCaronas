@@ -1,6 +1,7 @@
 import 'package:caronas/errors/AuthException.dart';
 import 'package:caronas/errors/FirebaseErrors.dart';
 import 'package:caronas/models/app_user.dart';
+import 'package:caronas/models/car.dart';
 import 'package:caronas/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,5 +58,10 @@ class AuthService extends ChangeNotifier {
     } catch (e) {
       throw AuthException("Error on creating user");
     }
+  }
+
+  void setCar(Car createdCar) async {
+    _user!.car = createdCar;
+    notifyListeners();
   }
 }
