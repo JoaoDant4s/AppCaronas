@@ -7,4 +7,5 @@ class AppRoutes {
   static const NEWACCOUNT = '/newAccount';
   static const MYPROFILE = '/myProfile';
   static const NEWCAR = '/newCar';
+  static const CARDETAIL = '/carDetail';
 }
