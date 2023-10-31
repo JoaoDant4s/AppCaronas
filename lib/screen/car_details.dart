@@ -20,7 +20,7 @@ class _CarDetailState extends State<CarDetail> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).popUntil((route) => route.isFirst);
+            Navigator.of(context).pop();
           },
           icon: const Icon(
             Icons.arrow_back,
