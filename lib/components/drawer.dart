@@ -42,11 +42,9 @@ class HomeDrawer extends StatelessWidget {
                               )
                             : const CircleAvatar(
                                 radius: 50,
-                                backgroundColor:
-                                    Colors.grey, // Cor de fundo de sua escolha
+                                backgroundColor: Colors.grey,
                                 child: Icon(CupertinoIcons.person_fill,
-                                    size: 35,
-                                    color: Colors.white), // Ícone de pessoa
+                                    size: 35, color: Colors.white),
                               ),
                       ),
                     ),
