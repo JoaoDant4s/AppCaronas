@@ -1,6 +1,7 @@
 import 'package:caronas/screen/my_profile.dart';
 import 'package:caronas/services/auth_service.dart';
 import 'package:caronas/utils/first_last_name.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,18 +27,29 @@ class HomeDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                        width: 60,
-                        height: 60,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: ClipOval(
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage:
-                                Image.network(authService.user!.image).image,
-                          ),
-                        )),
+                      width: 60,
+                      height: 60,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: ClipOval(
+                        child: authService.user!.image.isNotEmpty
+                            ? CircleAvatar(
+                                radius: 50,
+                                backgroundImage:
+                                    Image.network(authService.user!.image)
+                                        .image,
+                              )
+                            : const CircleAvatar(
+                                radius: 50,
+                                backgroundColor:
+                                    Colors.grey, // Cor de fundo de sua escolha
+                                child: Icon(CupertinoIcons.person_fill,
+                                    size: 35,
+                                    color: Colors.white), // Ícone de pessoa
+                              ),
+                      ),
+                    ),
                     const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

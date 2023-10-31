@@ -4,6 +4,8 @@ import 'package:caronas/errors/UserDataException.dart';
 import 'package:caronas/firebase_db.dart';
 import 'package:caronas/firebase_storage.dart';
 import 'package:caronas/models/app_user.dart';
+import 'package:caronas/models/car.dart';
+import 'package:caronas/services/car_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -37,6 +39,9 @@ Future<AppUser?> getUserDataByUID(String uid) async {
         );
     final docSnapshot = await docRef.get();
     AppUser? appUser = docSnapshot.data();
+    Car? userCar;
+    userCar = await getCar(appUser!.id!);
+    appUser.setCar(userCar);
     return appUser;
   } on FirebaseException catch (e) {
     throw UserDataException("Error fetching user data");

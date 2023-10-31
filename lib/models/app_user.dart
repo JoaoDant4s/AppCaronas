@@ -21,7 +21,7 @@ class AppUser {
     required this.name,
     required this.image,
     required this.rating,
-    required this.car,
+    this.car,
   });
 
   setId(String id) {
@@ -32,6 +32,10 @@ class AppUser {
     image = imageURL;
   }
 
+  setCar(Car? car) {
+    this.car = car;
+  }
+
   factory AppUser.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
@@ -39,8 +43,6 @@ class AppUser {
     final data = snapshot.data();
     Timestamp birthTimestamp = data?['birth'];
     DateTime birthDate = birthTimestamp.toDate();
-
-    Car? car = data?['car'] != null ? Car.fromMap(data?['car']) : null;
 
     return AppUser(
       id: snapshot.id,
@@ -50,7 +52,6 @@ class AppUser {
       gender: data?['gender'],
       image: data?['image'],
       rating: data?['rating'],
-      car: car,
     );
   }
 

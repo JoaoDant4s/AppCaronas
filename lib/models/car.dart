@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Car {
-  String id;
+  String? id;
   String model;
   String licensePlate;
   int year;
@@ -11,7 +11,7 @@ class Car {
   String userID;
 
   Car({
-    required this.id,
+    this.id,
     required this.model,
     required this.licensePlate,
     required this.year,
@@ -42,7 +42,7 @@ class Car {
   Map<String, dynamic> toFirestore() {
     return {
       'model': model,
-      'licensePLate': licensePlate,
+      'licensePlate': licensePlate,
       'year': year,
       'availableSeats': availableSeats,
       'color': color,

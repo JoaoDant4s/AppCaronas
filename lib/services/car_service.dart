@@ -18,3 +18,18 @@ Future<String> createCar(Car car) async {
     throw CarException("Error registering a car");
   }
 }
+
+Future<Car?> getCar(String uid) async {
+  final carsRef = db.collection("car");
+
+  final query = carsRef.where("userID", isEqualTo: uid).withConverter(
+        fromFirestore: Car.fromFirestore,
+        toFirestore: (Car car, _) => car.toFirestore(),
+      );
+  Car? car;
+  final docSnapshot = await query.get();
+  if (docSnapshot.size != 0) {
+    car = docSnapshot.docs.first.data();
+  }
+  return car;
+}
