@@ -1,5 +1,7 @@
 import 'package:caronas/screen/my_profile.dart';
 import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/utils/app_routes.dart';
+import 'package:caronas/utils/check_car.dart';
 import 'package:caronas/utils/first_last_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -112,7 +114,7 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 const Row(
                   children: [
-                    Icon(Icons.directions_car, size: 30),
+                    Icon(Icons.fork_left_rounded, size: 30),
                     SizedBox(width: 10),
                     Text(
                       "My rides",
@@ -121,6 +123,35 @@ class HomeDrawer extends StatelessWidget {
                     SizedBox(width: 20),
                   ],
                 ),
+                checkUserCar(authService.user!)
+                    ? Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(AppRoutes.CARDETAIL);
+                                },
+                                child: const Row(
+                                  children: [
+                                    Icon(Icons.directions_car, size: 30),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      "My car",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Container(),
                 const SizedBox(
                   height: 20,
                 ),

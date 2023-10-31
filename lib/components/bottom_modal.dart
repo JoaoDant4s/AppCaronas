@@ -1,6 +1,7 @@
 import 'package:caronas/models/app_user.dart';
 import 'package:caronas/services/auth_service.dart';
 import 'package:caronas/utils/app_routes.dart';
+import 'package:caronas/utils/check_car.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +16,6 @@ class BottomModal extends StatelessWidget {
       color: Colors.black,
       width: 3.0,
     )));
-  }
-
-  bool checkUserCar(AppUser user) {
-    return user.car != null ? true : false;
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:caronas/screen/car_details.dart';
 import 'package:caronas/screen/home.dart';
 import 'package:caronas/screen/login.dart';
 import 'package:caronas/screen/new_account.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.REGISTER: (context) => Register(),
           AppRoutes.NEWACCOUNT: (context) => CadastroLogin(),
           AppRoutes.NEWCAR: (context) => NewCar(),
+          AppRoutes.CARDETAIL: (context) => CarDetail(),
         });
   }
 }
