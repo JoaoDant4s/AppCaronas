@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screen/car_details.dart';
+
 class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -133,9 +135,14 @@ class HomeDrawer extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Navigator.of(context).pop();
-                                  Navigator.of(context)
-                                      .pushNamed(AppRoutes.CARDETAIL);
+                                  if (authService.user!.car != null) {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => CarDetail(authService.user!.car!),
+                                      ),
+                                    );
+                                  }
                                 },
                                 child: const Row(
                                   children: [
