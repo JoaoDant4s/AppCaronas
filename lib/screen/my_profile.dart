@@ -56,13 +56,13 @@ class _MyProfileState extends State<MyProfile> {
     _emailController.text = authService.user!.email;
     _birthdateController.text =
         "${authService.user!.birth.day.toString()}/${authService.user!.birth.month}/${authService.user!.birth.year.toString()}";
-    String _selectedGender = authService.user!.gender;
+    String selectedGender = authService.user!.gender;
 
     void updateUser() async {
       if (_formkey.currentState!.validate()) {
         loading.value = true;
         authService.user!.setName(_usernameController.text);
-        authService.user!.setGender(_selectedGender);
+        authService.user!.setGender(selectedGender);
         authService.user!
             .setBirth(_dateFormat.parse(_birthdateController.text));
         try {
@@ -215,7 +215,7 @@ class _MyProfileState extends State<MyProfile> {
                         Flexible(
                           flex: 2,
                           child: DropdownButtonFormField(
-                            value: _selectedGender,
+                            value: selectedGender,
                             decoration: const InputDecoration(
                               labelText: 'Gender',
                               enabledBorder: OutlineInputBorder(
@@ -242,7 +242,7 @@ class _MyProfileState extends State<MyProfile> {
                             }).toList(),
                             onChanged: (value) {
                               setState(() {
-                                _selectedGender = value.toString();
+                                selectedGender = value.toString();
                               });
                             },
                             validator: (value) {
@@ -312,7 +312,7 @@ class _MyProfileState extends State<MyProfile> {
                                       ),
                                     )
                                   : const Text(
-                                      'Register',
+                                      'Update',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
