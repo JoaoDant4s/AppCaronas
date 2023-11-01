@@ -1,8 +1,8 @@
 import 'package:caronas/components/ride_list_view.dart';
 import 'package:caronas/components/search_bar_ride.dart';
-import 'package:caronas/data/my_cards.dart';
 import 'package:caronas/models/ride.dart';
 import 'package:flutter/material.dart';
+import 'package:caronas/services/ride_service.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -12,6 +12,9 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  List<Ride> _rides = [];
+  List<Ride> _filteredRides = [];
+
   _searchRides(String origin, String destiny) {
     List<Ride> searchResults = _rides.where((ride) {
       bool isInOrigin = false;
@@ -20,8 +23,7 @@ class _SearchState extends State<Search> {
         isInOrigin = ride.origin.toLowerCase().contains(origin.toLowerCase());
       }
       if (destiny.isNotEmpty) {
-        isInDestiny =
-            ride.destiny.toLowerCase().contains(destiny.toLowerCase());
+        isInDestiny = ride.destiny.toLowerCase().contains(destiny.toLowerCase());
       }
       return isInOrigin || isInDestiny;
     }).toList();
@@ -33,18 +35,20 @@ class _SearchState extends State<Search> {
     });
   }
 
-  List<Ride> _rides = [];
-
   @override
   void initState() {
     super.initState();
+    _loadRides();
+  }
+
+  _loadRides() async {
+    List<Ride> rides = await getAllRides();
     setState(() {
-      _rides = List.from(ridesData);
+      _rides = rides;
       _filteredRides = List.from(_rides);
     });
   }
 
-  List<Ride> _filteredRides = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +76,13 @@ class _SearchState extends State<Search> {
         children: <Widget>[
           SearchBarRide(_searchRides),
           Visibility(
-            visible: _filteredRides.isNotEmpty,
+            visible: _rides.isNotEmpty,
             child: Expanded(
-              child: RideList(_filteredRides),
+              child: RideList(_rides),
             ),
           ),
           Visibility(
-            visible: _filteredRides.isEmpty,
+            visible: _rides.isEmpty,
             child: const Center(
               child: Text(
                 "No rides found",

@@ -1,20 +1,30 @@
-import 'package:caronas/data/my_cards.dart';
+import 'package:caronas/components/snackbar.dart';
+import 'package:caronas/errors/rideException.dart';
 import 'package:caronas/models/ride.dart';
 import 'package:flutter/material.dart';
+import 'package:caronas/services/ride_service.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Register> createState() => _RegisterRideState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterRideState extends State<Register> {
+  final _formKey = GlobalKey<FormState>();
   DateTime _selectedDate = DateTime.now();
   final _origin = TextEditingController();
   final _destiny = TextEditingController();
   final _price = TextEditingController();
   final _seats = TextEditingController();
+
+  void resetInputs() {
+    setState(() {
+      _origin.clear();
+      _destiny.clear();
+    });
+  }
 
   Future<void> _showDatePicker(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -31,56 +41,9 @@ class _RegisterState extends State<Register> {
     }
   }
 
-  _submitRide() {
-    if (_origin.text.isEmpty ||
-        _destiny.text.isEmpty ||
-        _price.text.isEmpty ||
-        _seats.text.isEmpty) return;
-    double price;
-    int seats;
-    try {
-      price = double.parse(_price.text);
-      seats = int.parse(_seats.text);
-    } catch (e) {
-      print("Error while trying to convert data");
-      return;
-    }
-    ridesData.insert(
-      0,
-      Ride(
-        id: ridesData.length.toString(),
-        origin: _origin.text,
-        destiny: _destiny.text,
-        price: price,
-        date: _selectedDate,
-        seats: seats,
-      ),
-    );
-    FocusScope.of(context).unfocus();
-    _destiny.text = "";
-    _origin.text = "";
-    _selectedDate = DateTime.now();
-    _price.text = "";
-    _seats.text = "";
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Colors.green,
-        content: Text(
-          "Ride created successfully",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-        ),
-        behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 3),
-        margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+
     showDatePickerFunction() {
       showDatePicker(
               context: context,
@@ -95,6 +58,55 @@ class _RegisterState extends State<Register> {
           _selectedDate = pickedDate;
         });
       });
+    }
+
+    void registerRide() async {
+    
+      String origin = _origin.text;
+      String destiny = _destiny.text;
+      double price = double.parse(_price.text);
+      DateTime date = _selectedDate;
+      int seats = int.parse(_seats.text);
+
+      Ride newRide = Ride(
+        id: UniqueKey().toString(),
+        origin: origin,
+        destiny: destiny,
+        price: price,
+        date: date,
+        seats: seats,
+      );
+
+      try {
+        String rideId = await createRide(newRide);
+        newRide.setId(rideId);
+
+        resetInputs();
+
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        CustomSnackBar.showSnackBar(
+          context,
+          "Ride registered successfully",
+          Colors.green,
+          Colors.white,
+        );
+      } catch (error) {
+        if (error is RideException) {
+          CustomSnackBar.showSnackBar(
+            context,
+            error.message,
+            Colors.red,
+            Colors.white,
+          );
+        } else {
+          CustomSnackBar.showSnackBar(
+            context,
+            "Internal server error",
+            Colors.red,
+            Colors.white,
+          );
+        }
+      }
     }
 
     return Scaffold(
@@ -286,7 +298,7 @@ class _RegisterState extends State<Register> {
                                 backgroundColor: const Color(0xFF09C184),
                                 padding: const EdgeInsets.all(20.0),
                               ),
-                              onPressed: _submitRide,
+                              onPressed: registerRide,
                               child: const Text(
                                 'Create',
                                 style: TextStyle(
