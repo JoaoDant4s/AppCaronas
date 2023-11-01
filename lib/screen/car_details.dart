@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/car.dart';
+import '../services/auth_service.dart';
 
 class CarDetail extends StatefulWidget {
   final Car car;
@@ -11,39 +13,9 @@ class CarDetail extends StatefulWidget {
 }
 
 class _CarDetailState extends State<CarDetail> {
-  // Função para mostrar o diálogo de confirmação de exclusão
-  Future<void> _showDeleteConfirmationDialog() async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Confirmação de Exclusão'),
-          content: Text('Tem certeza de que deseja excluir este carro?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                // Fecha o diálogo
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Coloque a lógica para excluir o carro aqui
-                // Após a exclusão, você pode navegar para a página anterior ou fazer outra ação necessária
-                Navigator.of(context).pop(); // Fecha o diálogo
-                // Adicione a lógica de exclusão aqui
-              },
-              child: Text('Excluir'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Provider.of<AuthService>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF09C184),
@@ -114,15 +86,6 @@ class _CarDetailState extends State<CarDetail> {
                     style: const TextStyle(fontSize: 18.0),
                   ),
                 ),
-                // Adicione outras informações do carro como desejado
-                // Por exemplo:
-                // ListTile(
-                //   leading: Icon(Icons.feature),
-                //   title: Text(
-                //     'Feature: ${widget.car.feature}',
-                //     style: const TextStyle(fontSize: 18.0),
-                //   ),
-                // ),
                 const SizedBox(height: 20),
               ],
             ),
@@ -140,7 +103,6 @@ class _CarDetailState extends State<CarDetail> {
                       minimumSize: const Size(200, 60),
                     ),
                     onPressed: () {
-                      // Coloque a lógica para editar as características do carro aqui
                     },
                     child: const Text(
                       'Editar',
@@ -159,7 +121,38 @@ class _CarDetailState extends State<CarDetail> {
                       minimumSize: const Size(200, 60),
                     ),
                     onPressed: () {
-                      _showDeleteConfirmationDialog(); // Mostra o diálogo de confirmação de exclusão
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Confirmação de Exclusão'),
+                            content: Text('Tem certeza de que deseja excluir este carro?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Cancelar'),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  try {
+                                    if (widget.car.id != null) {
+                                      await authService.deleteCarFromFirestore(widget.car.id!);
+                                      authService.user?.setCar(null);
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
+                                    }
+                                  } catch (_) {
+                                    print("Erro ao excluir o carro.");
+                                  }
+                                },
+                                child: Text('Excluir'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: const Text(
                       'Excluir',
