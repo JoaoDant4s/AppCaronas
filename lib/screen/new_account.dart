@@ -101,7 +101,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
             Colors.green,
             Colors.white,
           );
-          resetInputs();
+          
           Navigator.of(context).pop();
         } catch (error) {
           if (error is AuthException) {

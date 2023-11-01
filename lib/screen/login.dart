@@ -39,6 +39,7 @@ class _LoginState extends State<Login> {
               Colors.white,
             );
           }
+          loading.value = false;
         }
       }
     }
