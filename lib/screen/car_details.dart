@@ -105,7 +105,7 @@ class _CarDetailState extends State<CarDetail> {
                     onPressed: () {
                     },
                     child: const Text(
-                      'Editar',
+                      'Edit',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -125,14 +125,14 @@ class _CarDetailState extends State<CarDetail> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Confirmação de Exclusão'),
-                            content: Text('Tem certeza de que deseja excluir este carro?'),
+                            title: Text('Deletion Confirmation'),
+                            content: Text('Are you sure you want to delete this car?'),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Cancelar'),
+                                child: Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -144,10 +144,10 @@ class _CarDetailState extends State<CarDetail> {
                                       Navigator.of(context).pop();
                                     }
                                   } catch (_) {
-                                    print("Erro ao excluir o carro.");
+                                    print("Error deleting the car.");
                                   }
                                 },
-                                child: Text('Excluir'),
+                                child: Text('Delete'),
                               ),
                             ],
                           );
@@ -155,7 +155,7 @@ class _CarDetailState extends State<CarDetail> {
                       );
                     },
                     child: const Text(
-                      'Excluir',
+                      'Delete',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
