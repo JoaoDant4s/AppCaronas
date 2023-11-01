@@ -50,7 +50,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.REGISTER: (context) => Register(),
           AppRoutes.NEWACCOUNT: (context) => CadastroLogin(),
           AppRoutes.NEWCAR: (context) => NewCar(),
-          AppRoutes.CARDETAIL: (context) => CarDetail(),
-        });
+
+          },
+        );
   }
 }
