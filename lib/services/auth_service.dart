@@ -71,6 +71,25 @@ class AuthService extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void> updateCarInFirestore(Car car) async {
+    try {
+      if (car.id != null) {
+        await db.collection('car').doc(car.id!).update({
+          'brand': car.brand,
+          'model': car.model,
+          'year': car.year,
+          'licensePlate': car.licensePlate,
+          'color': car.color,
+          'availableSeats': car.availableSeats,
+        });
+      }
+    } catch (error) {
+      throw CarException("Error updating the car: $error");
+    }
+  }
+
+
   void setCar(Car createdCar) async {
     _user!.car = createdCar;
     notifyListeners();
