@@ -36,6 +36,18 @@ class AppUser {
     this.car = car;
   }
 
+  setName(String name) {
+    this.name = name;
+  }
+
+  setGender(String gender) {
+    this.gender = gender;
+  }
+
+  setBirth(DateTime date) {
+    birth = date;
+  }
+
   factory AppUser.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,

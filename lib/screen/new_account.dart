@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:caronas/components/snackbar.dart';
 import 'package:caronas/errors/AuthException.dart';
 import 'package:caronas/models/app_user.dart';
-import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/services/auth_service_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -101,7 +101,7 @@ class _CadastroLoginState extends State<CadastroLogin> {
             Colors.green,
             Colors.white,
           );
-          resetInputs();
+          
           Navigator.of(context).pop();
         } catch (error) {
           if (error is AuthException) {

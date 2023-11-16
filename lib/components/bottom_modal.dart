@@ -1,5 +1,5 @@
 import 'package:caronas/models/app_user.dart';
-import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/services/auth_service_provider.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:caronas/utils/check_car.dart';
 import 'package:flutter/material.dart';

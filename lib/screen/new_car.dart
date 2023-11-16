@@ -1,7 +1,7 @@
 import 'package:caronas/components/snackbar.dart';
 import 'package:caronas/errors/CarException.dart';
 import 'package:caronas/models/car.dart';
-import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/services/auth_service_provider.dart';
 import 'package:caronas/services/car_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,10 +1,10 @@
 import 'package:caronas/errors/AuthException.dart';
 import 'package:caronas/errors/FirebaseErrors.dart';
+import 'package:caronas/errors/UserDataException.dart';
 import 'package:caronas/firebase_db.dart';
 import 'package:caronas/models/app_user.dart';
 import 'package:caronas/models/car.dart';
 import 'package:caronas/services/user_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -63,6 +63,7 @@ class AuthService extends ChangeNotifier {
       throw AuthException("Error on creating user");
     }
   }
+
   Future<void> deleteCarFromFirestore(String carId) async {
     try {
       await db.collection('car').doc(carId).delete();
@@ -89,9 +90,23 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-
   void setCar(Car createdCar) async {
     _user!.car = createdCar;
+    notifyListeners();
+  }
+
+  Future<void> updateUser(AppUser user) async {
+    try {
+      final docRef = db.collection('user').doc(user.id);
+
+      await docRef.update({
+        "name": user.name,
+        "gender": user.gender,
+        "birth": user.birth,
+      });
+    } on FirebaseException catch (e) {
+      throw UserDataException("Error uploading user data");
+    }
     notifyListeners();
   }
 }
