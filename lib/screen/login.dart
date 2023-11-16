@@ -1,6 +1,6 @@
 import 'package:caronas/components/snackbar.dart';
 import 'package:caronas/errors/AuthException.dart';
-import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/services/auth_service_provider.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,8 +1,8 @@
 import 'package:caronas/components/ride_list_view.dart';
 import 'package:caronas/components/search_bar_ride.dart';
 import 'package:caronas/models/ride.dart';
-import 'package:flutter/material.dart';
 import 'package:caronas/services/ride_service.dart';
+import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -23,7 +23,8 @@ class _SearchState extends State<Search> {
         isInOrigin = ride.origin.toLowerCase().contains(origin.toLowerCase());
       }
       if (destiny.isNotEmpty) {
-        isInDestiny = ride.destiny.toLowerCase().contains(destiny.toLowerCase());
+        isInDestiny =
+            ride.destiny.toLowerCase().contains(destiny.toLowerCase());
       }
       return isInOrigin || isInDestiny;
     }).toList();
@@ -76,13 +77,13 @@ class _SearchState extends State<Search> {
         children: <Widget>[
           SearchBarRide(_searchRides),
           Visibility(
-            visible: _rides.isNotEmpty,
+            visible: _filteredRides.isNotEmpty,
             child: Expanded(
-              child: RideList(_rides),
+              child: RideList(_filteredRides),
             ),
           ),
           Visibility(
-            visible: _rides.isEmpty,
+            visible: _filteredRides.isEmpty,
             child: const Center(
               child: Text(
                 "No rides found",

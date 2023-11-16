@@ -1,6 +1,7 @@
 import 'package:caronas/components/bottom_modal.dart';
 import 'package:caronas/components/drawer.dart';
-import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/services/auth_service_provider.dart';
+import 'package:caronas/services/location_service_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -65,53 +66,59 @@ class Home extends StatelessWidget {
         ],
       ),
       drawer: HomeDrawer(),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+      body: Consumer<LocationService>(
+        builder: (context, location_service_provider, child) {
+          location_service_provider.hasPermissions();
+          return Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Hello there!",
-                          style: TextStyle(
-                            fontSize: 27,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Hello there!",
+                              style: TextStyle(
+                                fontSize: 27,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              'How about we look for a ride?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 18),
+                            )
+                          ],
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          'How about we look for a ride?',
-                          textAlign: TextAlign.center,
-                          style:
-                              TextStyle(color: Colors.grey[700], fontSize: 18),
-                        )
                       ],
                     ),
-                  ],
-                ),
-              ),
-              Stack(
-                children: <Widget>[
-                  Image(
-                    image: AssetImage("assets/images/3dcar.png"),
-                    width: 800,
-                    fit: BoxFit.cover,
                   ),
+                  const Stack(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/3dcar.png"),
+                        width: 800,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  )
                 ],
-              )
-            ],
-          ),
-        ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

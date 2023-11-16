@@ -1,5 +1,5 @@
 import 'package:caronas/screen/my_profile.dart';
-import 'package:caronas/services/auth_service.dart';
+import 'package:caronas/services/auth_service_provider.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:caronas/utils/check_car.dart';
 import 'package:caronas/utils/first_last_name.dart';
