@@ -9,12 +9,14 @@ import 'package:caronas/services/location_service_provider.dart';
 import 'package:caronas/theme/theme.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await initializeFirebase();
   runApp(
     MultiProvider(

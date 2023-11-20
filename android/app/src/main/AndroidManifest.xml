@@ -1,8 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="caronas"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data 
+            android:name="com.google.android.geo.API_KEY" 
+            android:value="dotenv.env['MAPS_APIKEY']"
+        />
         <activity
             android:name=".MainActivity"
             android:exported="true"
