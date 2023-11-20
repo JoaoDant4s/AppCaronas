@@ -62,10 +62,13 @@ class _CarDetailState extends State<CarDetail> {
               SizedBox(height: 20),
               buildInputField(brandController, 'Brand', isString: true),
               buildInputField(modelController, 'Model', isString: true),
-              buildInputField(yearController, 'Year', isNumeric: true, isRequired: true),
-              buildInputField(licensePlateController, 'License Plate', isString: true),
+              buildInputField(yearController, 'Year',
+                  isNumeric: true, isRequired: true),
+              buildInputField(licensePlateController, 'License Plate',
+                  isString: true),
               buildInputField(colorController, 'Color', isString: true),
-              buildInputField(availableSeatsController, 'Available Seats', isNumeric: true, isRequired: true),
+              buildInputField(availableSeatsController, 'Available Seats',
+                  isNumeric: true, isRequired: true),
               SizedBox(height: 20),
               Row(
                 children: [
@@ -77,17 +80,21 @@ class _CarDetailState extends State<CarDetail> {
                         if (_formKey.currentState?.validate() ?? false) {
                           widget.car.brand = brandController.text;
                           widget.car.model = modelController.text;
-                          widget.car.year = int.tryParse(yearController.text) ?? 0;
+                          widget.car.year =
+                              int.tryParse(yearController.text) ?? 0;
                           widget.car.licensePlate = licensePlateController.text;
                           widget.car.color = colorController.text;
-                          widget.car.availableSeats = int.tryParse(availableSeatsController.text) ?? 0;
+                          widget.car.availableSeats =
+                              int.tryParse(availableSeatsController.text) ?? 0;
 
                           try {
                             await authService.updateCarInFirestore(widget.car);
 
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(backgroundColor:Colors.green ,
-                                content: Text('Car details updated successfully!'),
+                              SnackBar(
+                                backgroundColor: Colors.green,
+                                content:
+                                    Text('Car details updated successfully!'),
                               ),
                             );
                           } catch (error) {
@@ -108,7 +115,8 @@ class _CarDetailState extends State<CarDetail> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text('Deletion Confirmation'),
-                              content: Text('Are you sure you want to delete this car?'),
+                              content: Text(
+                                  'Are you sure you want to delete this car?'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -120,7 +128,9 @@ class _CarDetailState extends State<CarDetail> {
                                   onPressed: () async {
                                     try {
                                       if (widget.car.id != null) {
-                                        await authService.deleteCarFromFirestore(widget.car.id!);
+                                        await authService
+                                            .deleteCarFromFirestore(
+                                                widget.car.id!);
                                         authService.user?.setCar(null);
                                         Navigator.of(context).pop();
                                         Navigator.of(context).pop();
@@ -147,7 +157,10 @@ class _CarDetailState extends State<CarDetail> {
     );
   }
 
-  Widget buildInputField(TextEditingController controller, String label, {bool isNumeric = false, bool isString = false, bool isRequired = false}) {
+  Widget buildInputField(TextEditingController controller, String label,
+      {bool isNumeric = false,
+      bool isString = false,
+      bool isRequired = false}) {
     return Container(
       padding: EdgeInsets.only(bottom: 20.0),
       child: TextFormField(
@@ -163,7 +176,9 @@ class _CarDetailState extends State<CarDetail> {
           if (isString && (value?.isEmpty ?? false)) {
             return 'This field is required.';
           }
-          if (isNumeric && (value?.isNotEmpty ?? false) && int.tryParse(value!) == null) {
+          if (isNumeric &&
+              (value?.isNotEmpty ?? false) &&
+              int.tryParse(value!) == null) {
             return 'Please enter a valid number.';
           }
           return null;
