@@ -1,3 +1,4 @@
+import 'package:caronas/components/steps/destiny.dart';
 import 'package:caronas/components/steps/origin.dart';
 import 'package:caronas/services/ride_stepper_service_provider.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,7 @@ class _RideStepperState extends State<RideStepper> {
           ),
           Step(
             title: const Text("Destiny"),
-            content: Text("test"),
+            content: DestinyStep(),
             isActive: rideStepperService.currentStep >= 1,
             state: rideStepperService.handleState('destiny'),
           ),

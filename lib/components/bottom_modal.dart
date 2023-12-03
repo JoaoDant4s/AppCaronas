@@ -1,25 +1,36 @@
 import 'package:caronas/models/app_user.dart';
 import 'package:caronas/services/auth_service_provider.dart';
+import 'package:caronas/services/location_service_provider.dart';
 import 'package:caronas/utils/app_routes.dart';
 import 'package:caronas/utils/check_car.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BottomModal extends StatelessWidget {
+class BottomModal extends StatefulWidget {
   final AppUser user;
   BottomModal(this.user);
 
+  @override
+  State<BottomModal> createState() => _BottomModalState();
+}
+
+class _BottomModalState extends State<BottomModal> {
+  bool isLoading = false;
   BoxDecoration myBoxDecoration() {
-    return BoxDecoration(
-        border: Border(
-            top: BorderSide(
-      color: Colors.black,
-      width: 3.0,
-    )));
+    return const BoxDecoration(
+      border: Border(
+        top: BorderSide(
+          color: Colors.black,
+          width: 3.0,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    LocationService locationService =
+        Provider.of<LocationService>(context, listen: false);
     myDialog() {
       return showDialog(
         context: context,
@@ -46,6 +57,19 @@ class BottomModal extends StatelessWidget {
       );
     }
 
+    getUserLocation() async {
+      if (mounted) {
+        setState(() {
+          isLoading = true;
+        });
+        await locationService.calcUserLocation();
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.of(context).pushNamed(AppRoutes.REGISTER);
+      }
+    }
+
     return Container(
       height: 300,
       decoration: BoxDecoration(
@@ -60,74 +84,79 @@ class BottomModal extends StatelessWidget {
             width: 70,
             decoration: myBoxDecoration(),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 120.0,
-                        height: 120.0,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/gifs/espanhol.gif"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        "Passenger",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pushNamed(AppRoutes.SEARCH);
-                  },
-                ),
-              ),
-              Expanded(
-                child: Consumer<AuthService>(
-                  builder: (context, auth_service, child) {
-                    return GestureDetector(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 120.0,
-                            height: 120.0,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/gifs/volante.gif"),
-                                fit: BoxFit.cover,
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 120.0,
+                              height: 120.0,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/gifs/espanhol.gif"),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          const Text(
-                            "Driver",
-                            style: TextStyle(fontSize: 20),
-                          )
-                        ],
+                            const Text(
+                              "Passenger",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(AppRoutes.SEARCH);
+                        },
                       ),
-                      onTap: () {
-                        bool hasCar = checkUserCar(auth_service.user!);
-                        if (!hasCar) {
-                          myDialog();
-                          return;
-                        }
-                        Navigator.of(context).pushNamed(AppRoutes.REGISTER);
-                      },
-                    );
-                  },
+                    ),
+                    Expanded(
+                      child: Consumer<AuthService>(
+                        builder: (context, auth_service, child) {
+                          return GestureDetector(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 120.0,
+                                  height: 120.0,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/gifs/volante.gif"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                const Text(
+                                  "Driver",
+                                  style: TextStyle(fontSize: 20),
+                                )
+                              ],
+                            ),
+                            onTap: () async {
+                              bool hasCar = checkUserCar(auth_service.user!);
+                              if (!hasCar) {
+                                myDialog();
+                                return;
+                              }
+                              await getUserLocation();
+                            },
+                          );
+                        },
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
         ],
       ),
     );

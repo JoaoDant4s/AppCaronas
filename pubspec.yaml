@@ -45,6 +45,7 @@ dependencies:
   flutter_config: ^2.0.2
   flutter_dotenv: ^5.1.0
   google_maps_flutter: ^2.5.0
+  geocoding: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,8 @@ flutter:
     - assets/images/joao_dantas.jpg
     - assets/images/edvaldo.jpeg
     - assets/images/register_car.png
+    - assets/images/origin_location_icon.png
+    - assets/images/destiny_location_icon.png
   fonts:
     - family: Poppins
       fonts:
