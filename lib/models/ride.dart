@@ -31,7 +31,7 @@ class Ride {
       id: snapshot.id,
       origin: data?['origin'],
       driverID: data?['driverID'],
-      participants: data?['participants'],
+      participants: (data?['participants'] as List<dynamic>).cast<String>(),
       destiny: data?['destiny'],
       date: (data?['date'] as Timestamp).toDate(),
       price: data?['price'],
