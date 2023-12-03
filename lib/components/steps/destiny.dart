@@ -16,7 +16,6 @@ class DestinyStep extends StatefulWidget {
 class _DestinyStepState extends State<DestinyStep> {
   late LocationService locationService;
   late RideStepperService rideStepperService;
-  final _destinyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     rideStepperService =
@@ -28,7 +27,7 @@ class _DestinyStepState extends State<DestinyStep> {
         await rideStepperService.selectPositionOnMap(tappedPosition);
         String address =
             await locationService.coordinatesToAddress(tappedPosition);
-        _destinyController.text = address;
+        rideStepperService.destiny.text = address;
       } catch (e) {
         print("An error ocurred: $e");
       }
@@ -69,7 +68,7 @@ class _DestinyStepState extends State<DestinyStep> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      controller: _destinyController,
+                      controller: rideStepperService.destiny,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,

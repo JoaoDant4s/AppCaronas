@@ -16,7 +16,6 @@ class OriginStep extends StatefulWidget {
 class _OriginStepState extends State<OriginStep> {
   late LocationService locationService;
   late RideStepperService rideStepperService;
-  final _originController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class _OriginStepState extends State<OriginStep> {
         await rideStepperService.selectPositionOnMap(tappedPosition);
         String address =
             await locationService.coordinatesToAddress(tappedPosition);
-        _originController.text = address;
+        rideStepperService.origin.text = address;
       } catch (e) {
         print("An error ocurred: $e");
       }
@@ -39,11 +38,11 @@ class _OriginStepState extends State<OriginStep> {
       child: Column(
         children: [
           Expanded(
-            child: Stack(
-              children: [
-                Consumer<RideStepperService>(
-                  builder: (context, rideStepperService, child) {
-                    return GoogleMap(
+            child: Consumer<RideStepperService>(
+              builder: (context, rideStepperService, child) {
+                return Stack(
+                  children: [
+                    GoogleMap(
                       initialCameraPosition: CameraPosition(
                         target: rideStepperService.originPosition != null
                             ? LatLng(
@@ -68,33 +67,33 @@ class _OriginStepState extends State<OriginStep> {
                           () => EagerGestureRecognizer(),
                         ),
                       ].toSet(),
-                    );
-                  },
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _originController,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        labelText: 'Type the origin address here',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: Color(0xFF09C184),
-                              style: BorderStyle.solid),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: rideStepperService.origin,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            labelText: 'Type the origin address here',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Color(0xFF09C184),
+                                  style: BorderStyle.solid),
+                            ),
+                            prefixIcon: const Icon(Icons.location_on),
+                          ),
                         ),
-                        prefixIcon: const Icon(Icons.location_on),
                       ),
                     ),
-                  ),
-                ),
-              ],
+                  ],
+                );
+              },
             ),
           ),
         ],

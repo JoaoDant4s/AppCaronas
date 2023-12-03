@@ -1,5 +1,7 @@
 import 'package:caronas/components/steps/destiny.dart';
 import 'package:caronas/components/steps/origin.dart';
+import 'package:caronas/components/steps/othres.dart';
+import 'package:caronas/services/auth_service_provider.dart';
 import 'package:caronas/services/ride_stepper_service_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +18,14 @@ class _RideStepperState extends State<RideStepper> {
   Widget build(BuildContext context) {
     RideStepperService rideStepperService =
         Provider.of<RideStepperService>(context, listen: true);
+    AuthService authService = Provider.of<AuthService>(context, listen: true);
     return Scaffold(
       floatingActionButton: Row(
         children: [
           Expanded(
             flex: 1,
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               margin: const EdgeInsets.only(left: 30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,10 +56,15 @@ class _RideStepperState extends State<RideStepper> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    onPressed: rideStepperService.nextStep,
-                    child: const Text(
-                      "Next",
-                      style: TextStyle(
+                    onPressed: () {
+                      rideStepperService.nextStep(
+                          context, authService.user!.id!);
+                    },
+                    child: Text(
+                      rideStepperService.currentStep != 2
+                          ? "Next"
+                          : "Create ride",
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -79,7 +87,9 @@ class _RideStepperState extends State<RideStepper> {
         elevation: 0,
         type: StepperType.horizontal,
         currentStep: rideStepperService.currentStep,
-        onStepContinue: rideStepperService.nextStep,
+        onStepContinue: () {
+          rideStepperService.nextStep(context, authService.user!.id!);
+        },
         onStepTapped: rideStepperService.stepTapped,
         controlsBuilder: rideStepperService.controlBuilder,
         steps: [
@@ -96,10 +106,10 @@ class _RideStepperState extends State<RideStepper> {
             state: rideStepperService.handleState('destiny'),
           ),
           Step(
-            title: const Text("Details"),
-            content: Text("test"),
+            title: const Text("Others"),
+            content: DetailsStep(),
             isActive: rideStepperService.currentStep == 2,
-            state: rideStepperService.handleState('details'),
+            state: rideStepperService.handleState('others'),
           ),
         ],
       ),

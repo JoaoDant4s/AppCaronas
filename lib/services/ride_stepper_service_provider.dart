@@ -1,3 +1,7 @@
+import 'package:caronas/components/snackbar.dart';
+import 'package:caronas/errors/rideException.dart';
+import 'package:caronas/models/ride.dart';
+import 'package:caronas/services/ride_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -9,6 +13,13 @@ class RideStepperService extends ChangeNotifier {
   LatLng? destinyPosition;
   Set<Marker> markers = Set<Marker>();
 
+  final formKey = GlobalKey<FormState>();
+  DateTime selectedDate = DateTime.now();
+  final origin = TextEditingController();
+  final destiny = TextEditingController();
+  final price = TextEditingController();
+  final seats = TextEditingController();
+
   get originMapsController => _originMapsController;
   get destinyMapsController => _destinyMapsController;
 
@@ -19,10 +30,19 @@ class RideStepperService extends ChangeNotifier {
 
   // }
 
-  nextStep() {
-    if (currentStep < 2) {
-      currentStep++;
-      notifyListeners();
+  nextStep(BuildContext context, String driverID) {
+    if (currentStep == 0) {
+      if (origin.text.isNotEmpty) {
+        currentStep++;
+        notifyListeners();
+      }
+    } else if (currentStep == 1) {
+      if (destiny.text.isNotEmpty) {
+        currentStep++;
+        notifyListeners();
+      }
+    } else {
+      submitForm(context, driverID);
     }
   }
 
@@ -75,6 +95,65 @@ class RideStepperService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetInputs() {
+    origin.clear();
+    destiny.clear();
+    seats.clear();
+    price.clear();
+    selectedDate = DateTime.now();
+  }
+
+  void submitForm(BuildContext context, String driverID) async {
+    // Armazena uma referência ao contexto
+    BuildContext localContext = context;
+    List<String> participants = [];
+    double priceFormatted = double.parse(price.text);
+    DateTime date = selectedDate;
+    int seatsAvailable = int.parse(seats.text);
+
+    Ride newRide = Ride(
+      id: UniqueKey().toString(),
+      driverID: driverID,
+      participants: participants,
+      origin: origin.text,
+      destiny: destiny.text,
+      price: priceFormatted,
+      date: date,
+      seats: seatsAvailable,
+    );
+
+    try {
+      String rideId = await createRide(newRide);
+      newRide.setId(rideId);
+
+      resetInputs();
+
+      Navigator.of(localContext).popUntil((route) => route.isFirst);
+      CustomSnackBar.showSnackBar(
+        localContext,
+        "Ride registered successfully",
+        Colors.green,
+        Colors.white,
+      );
+    } catch (error) {
+      if (error is RideException) {
+        CustomSnackBar.showSnackBar(
+          localContext,
+          error.message,
+          Colors.red,
+          Colors.white,
+        );
+      } else {
+        CustomSnackBar.showSnackBar(
+          localContext,
+          "Internal server error",
+          Colors.red,
+          Colors.white,
+        );
+      }
+    }
+  }
+
   StepState handleState(String step) {
     switch (step) {
       case 'origin':
@@ -93,7 +172,7 @@ class RideStepperService extends ChangeNotifier {
         } else {
           return StepState.disabled;
         }
-      case 'details':
+      case 'others':
         return currentStep != 2 ? StepState.disabled : StepState.indexed;
       default:
         return StepState.disabled;

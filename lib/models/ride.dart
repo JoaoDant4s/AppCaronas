@@ -6,10 +6,14 @@ class Ride {
   String destiny;
   DateTime date;
   double price;
+  String driverID;
+  List<String> participants;
   int seats;
 
   Ride({
     required this.id,
+    required this.driverID,
+    required this.participants,
     required this.origin,
     required this.destiny,
     required this.date,
@@ -26,6 +30,8 @@ class Ride {
     return Ride(
       id: snapshot.id,
       origin: data?['origin'],
+      driverID: data?['driverID'],
+      participants: data?['participants'],
       destiny: data?['destiny'],
       date: (data?['date'] as Timestamp).toDate(),
       price: data?['price'],
@@ -36,6 +42,8 @@ class Ride {
   Map<String, dynamic> toFirestore() {
     return {
       'origin': origin,
+      'driverID': driverID,
+      'participants': participants,
       'destiny': destiny,
       'date': date,
       'price': price,
@@ -50,10 +58,10 @@ class Ride {
   Ride.fromMap(Map<String, dynamic> map)
       : id = map['id'],
         origin = map['origin'],
+        driverID = map['driverID'],
+        participants = map['participants'],
         destiny = map['destiny'],
         date = map['date'],
         price = map['price'],
         seats = map['seats'];
-
 }
-
