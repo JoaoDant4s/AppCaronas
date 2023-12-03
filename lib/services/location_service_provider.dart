@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart' as GeoCoding;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class LocationService extends ChangeNotifier {
@@ -36,5 +38,20 @@ class LocationService extends ChangeNotifier {
     LocationData locationData = await _location.getLocation();
     _userLocation = locationData;
     notifyListeners();
+  }
+
+  Future<String> coordinatesToAddress(LatLng coordinates) async {
+    List<GeoCoding.Placemark> placemarks =
+        await GeoCoding.placemarkFromCoordinates(
+            coordinates.latitude, coordinates.longitude);
+    GeoCoding.Placemark placeTarget = placemarks[0];
+    return "${placeTarget.street} ${placeTarget.name}, ${placeTarget.subAdministrativeArea}, ${placeTarget.administrativeArea}";
+  }
+
+  Future<LatLng> addressToCoordinates(String address) async {
+    List<GeoCoding.Location> locations =
+        await GeoCoding.locationFromAddress(address);
+    GeoCoding.Location locationTarget = locations[0];
+    return LatLng(locationTarget.latitude, locationTarget.longitude);
   }
 }
