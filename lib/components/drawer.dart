@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../screen/car_details.dart';
+import '../screen/rides_history.dart';
 
 class HomeDrawer extends StatelessWidget {
   @override
@@ -114,16 +115,26 @@ class HomeDrawer extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Row(
-                  children: [
-                    Icon(Icons.fork_left_rounded, size: 30),
-                    SizedBox(width: 10),
-                    Text(
-                      "My rides",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(width: 20),
-                  ],
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => RideHistoryPage(),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.fork_left_rounded, size: 30),
+                      SizedBox(width: 10),
+                      Text(
+                        "My rides",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(width: 20),
+                    ],
+                  ),
                 ),
                 checkUserCar(authService.user!)
                     ? Column(
