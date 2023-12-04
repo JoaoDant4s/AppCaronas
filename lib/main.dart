@@ -1,3 +1,4 @@
+import 'package:caronas/firebase_messaging.dart';
 import 'package:caronas/screen/home.dart';
 import 'package:caronas/screen/login.dart';
 import 'package:caronas/screen/new_account.dart';
@@ -14,10 +15,13 @@ import 'package:provider/provider.dart';
 
 import 'firebase_config.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await initializeFirebase();
+  await FirebaseNotifications().initNotifications();
   runApp(
     MultiProvider(
       providers: [
@@ -50,6 +54,7 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
+      navigatorKey: navigatorKey,
       routes: {
         AppRoutes.LOGIN: (context) => Login(),
         AppRoutes.SEARCH: (context) => Search(),
