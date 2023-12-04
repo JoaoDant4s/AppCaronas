@@ -8,4 +8,5 @@ class AppRoutes {
   static const MYPROFILE = '/myProfile';
   static const NEWCAR = '/newCar';
   static const CARDETAIL = '/carDetail';
+  static const RIDEHISTORY = '/rideHistory';
 }

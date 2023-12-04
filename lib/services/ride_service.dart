@@ -49,3 +49,21 @@ Future<List<Ride>> getAllRides() async {
 
   return rides;
 }
+
+Future<List<Ride>> getRideByUser(String userId) async {
+  final ridesRef = FirebaseFirestore.instance.collection("rides");
+
+  final query = await ridesRef.where("participants", arrayContains: userId).withConverter(
+    fromFirestore: Ride.fromFirestore,
+    toFirestore: (Ride ride, _) => ride.toFirestore(),
+  ).get();
+
+  List<Ride> rides = [];
+
+  for (final doc in query.docs) {
+    final ride = doc.data();
+    rides.add(ride);
+  }
+
+  return rides;
+}
